@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">E-Commerce</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_favorite">Favorite</string>
+    <string name="bottom_nav_cart">Cart</string>
+    <string name="bottom_nav_profile">Profile</string>
+    <string name="login_email_edittext_hint">E-Mail</string>
+    <string name="login_password_edittext_hint">Password</string>
+    <string name="button_text_login">Login</string>
+    <string name="button_text_signup">Signup</string>
+    <string name="name_text">Name :</string>
+    <string name="email_text">E-mail :</string>
+    <string name="phone_text">Phone :</string>
+    <string name="signuot_text">Sign out</string>
+    <string name="edittext_name_hint">Name and Lastname</string>
+    <string name="edittext_phone_number_hint">Phone Number :</string>
+    <string name="success_message1">Signup is successful</string>
+    <string name="error_message1">Signup is failed!</string>
+    <string name="error_message">Error!</string>
+    <string name="categories_text">Categories</string>
+    <string name="success_message2">Transaction successful!</string>
+
+    <string name="blanks_error">Please fill in the blanks</string>
+    <string name="add_cart_button_text">Add Cart</string>
+    <string-array name="titleList">
+        <item>Login</item>
+        <item>Signup</item>
+    </string-array>
+</resources>

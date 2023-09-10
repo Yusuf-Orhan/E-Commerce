@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">E-Ticaret</string>
+    <string name="bottom_nav_home">Anasayfa</string>
+    <string name="bottom_nav_favorite">Favorilerim</string>
+    <string name="bottom_nav_cart">Sepetim</string>
+    <string name="bottom_nav_profile">Hesabım</string>
+    <string name="login_email_edittext_hint">E-Posta</string>
+    <string name="login_password_edittext_hint">Şifre</string>
+    <string name="button_text_login">Giriş Yap</string>
+    <string name="edittext_name_hint">Adınız ve Soyadınız</string>
+    <string name="button_text_signup">Kayıt Ol</string>
+    <string name="edittext_phone_number_hint">Telefon Numarası</string>
+    <string name="success_message1">Kayıt başarılı</string>
+    <string name="error_message1">Kayıt Başarısız Oldu</string>
+    <string name="blanks_error">Lütfen boşlukları doldurun</string>
+    <string name="signuot_text">Sign out</string>
+    <string name="error_message">Beklenmeyen bir hata oluştu!</string>
+    <string name="categories_text">Kategoriler</string>
+    <string name="add_cart_button_text">Sepete Ekle</string>
+    <string name="success_message2">İşlem başarılı!</string>
+
+    <string name="name_text">Adınız :</string>
+    <string name="email_text">E-Posta :</string>
+    <string name="phone_text">Tel :</string>
+    <string-array name="titleList">
+        <item>Giriş Yap</item>
+        <item>Kayıt Ol</item>
+    </string-array>
+</resources>
