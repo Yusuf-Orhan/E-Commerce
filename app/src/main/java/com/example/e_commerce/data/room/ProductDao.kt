@@ -12,8 +12,12 @@ import com.google.android.gms.common.api.Response
 interface ProductDao {
     @Query("UPDATE ProductModel SET piece = :newPieceValue WHERE id = :productId")
     suspend fun updatePiece(productId: Int, newPieceValue: Int)
-    @Query("SELECT * FROM ProductModel WHERE id = :uid")
+    /*@Query("SELECT * FROM ProductModel WHERE id = :uid")
     suspend fun controlProduct(uid : Int) : ProductModel
+
+     */
+    @Query("SELECT EXISTS(SELECT 1 FROM ProductModel WHERE id = :id)")
+    suspend fun exists(id: Int): Boolean
 
     @Query("SELECT * FROM ProductModel")
     suspend fun getAllCart() : List<ProductModel>

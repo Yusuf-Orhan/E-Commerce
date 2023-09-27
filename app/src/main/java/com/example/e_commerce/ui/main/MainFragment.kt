@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private val viewModel : MainViewModel by viewModels()
-    private val productAdapter by lazy { ProductAdapter() }
+    private val productAdapter by lazy { ProductAdapter(requireContext()) }
     lateinit var binding : FragmentMainBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_main,container,false)
@@ -39,9 +39,7 @@ class MainFragment : Fragment() {
                 swipeRefreshLayout.isRefreshing = false
             }
         }
-
     }
-
     private fun observerLiveData(){
         with(viewModel){
             productsItemList.observe(viewLifecycleOwner){list ->
@@ -84,4 +82,6 @@ class MainFragment : Fragment() {
         }
 
     }
+
+
 }

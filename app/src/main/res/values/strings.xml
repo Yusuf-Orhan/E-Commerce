@@ -22,8 +22,11 @@
 
     <string name="blanks_error">Please fill in the blanks</string>
     <string name="add_cart_button_text">Add Cart</string>
+    <string name="gotopaytext">Goto Pay</string>
     <string-array name="titleList">
         <item>Login</item>
         <item>Signup</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -8,7 +8,4 @@ object Constants {
     const val NAME = "Name"
     const val PHONE_NUMBER = "Phone_Number"
     const val USER_EMAIL = "User_Email"
-
-
-
 }

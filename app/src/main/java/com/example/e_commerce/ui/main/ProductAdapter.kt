@@ -11,21 +11,19 @@ import com.example.e_commerce.data.model.retrofit.Products
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.databinding.ProductListItemBinding
 
-class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     private val productList = ArrayList<ProductsItem>()
-
     var onItemClick : (ProductsItem) -> Unit = {}
      class ProductViewHolder(val binding : ProductListItemBinding) : RecyclerView.ViewHolder(binding.root){
-         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem){
+         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem,context: Context){
              with(binding){
-                 productItemImage.loadImage(url = productsItem.image)
+                 productItemImage.loadImage(url = productsItem.image,context)
                  priceText = "${productsItem.price}$"
                  titleText = productsItem.title
                  rootView.setOnClickListener{
                      onClick(productsItem)
                  }
              }
-
          }
     }
 
@@ -37,7 +35,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
     override fun getItemCount(): Int = productList.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(onItemClick,productList[position])
+        holder.bind(onItemClick,productList[position], context = context)
     }
     fun loadData(newList : List<ProductsItem>){
         productList.clear()

@@ -28,6 +28,7 @@ class DetailFragment : Fragment() {
     private val viewModel : DetailViewModel by viewModels()
     private val arguments : DetailFragmentArgs by navArgs()
     private lateinit var productItem : ProductsItem
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
         binding.detailFragment = this
@@ -40,24 +41,27 @@ class DetailFragment : Fragment() {
         with(binding){
             productModel = productItem
             priceText = "$" + productItem.price.toString()
-            imageView.loadImage(productItem.image)
+            imageView.loadImage(productItem.image,requireContext())
             category = capitalizeString(productItem.category)
         }
-        viewModel.control(productItem.id)
+        viewModel.exists(productItem.id)
     }
     private fun capitalizeString(input: String): String {
         val words = input.split(" ")
         val capitalizedWords = words.map { it.capitalize(Locale.ROOT) }
         return capitalizedWords.joinToString(" ")
     }
+
     fun addCartButtonClick(){
-        if (viewModel.exist.value == null){
-            requireView().showToast("Daha önce kaydedilmemiş")
-        }else{
+        if (viewModel.isexist.value == true){
             requireView().showToast("Daha önce kaydedilmiş")
+            findNavController().popBackStack()
+            viewModel.insertItem(productItem,1)
+        }else{
+            findNavController().popBackStack()
+            viewModel.updatePiece(productItem.id,2)
+            requireView().showToast("Daha önce kaydedilmemiş")
         }
-        viewModel.insertItem(productItem,1)
-        findNavController().popBackStack()
         requireView().showToast(getString(R.string.success_message2))
     }
 

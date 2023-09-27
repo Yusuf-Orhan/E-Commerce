@@ -25,7 +25,11 @@
         android:id="@+id/cartFragment"
         android:name="com.example.e_commerce.ui.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.e_commerce.ui.detail.DetailFragment"
@@ -37,4 +41,9 @@
             android:id="@+id/action_detailFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.e_commerce.ui.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
 </navigation>

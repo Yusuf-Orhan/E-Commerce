@@ -21,12 +21,14 @@ class ProfileRepository @Inject constructor(private val firebaseAuth: FirebaseAu
             if (error != null){
                 println("Error : ${error.message}")
             }else{
-                val userMap = value?.data
-                email = userMap?.get(USER_EMAIL) as String
-                name = userMap[NAME] as String
-                phoneNumber = userMap[PHONE_NUMBER] as String
-                val user = User(name,phoneNumber, email)
-                userLiveData.postValue(user)
+                value?.let {
+                    val userMap = it.data
+                    email = userMap?.get(USER_EMAIL) as String
+                    name = userMap[NAME] as String
+                    phoneNumber = userMap[PHONE_NUMBER] as String
+                    val user = User(name,phoneNumber, email)
+                    userLiveData.value = user
+                }
 
             }
         }

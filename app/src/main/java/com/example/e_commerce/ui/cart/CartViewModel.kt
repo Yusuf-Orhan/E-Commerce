@@ -1,5 +1,6 @@
 package com.example.e_commerce.ui.cart
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,14 +13,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(private val repo : CartRepository): ViewModel(){
-    var allProductList = MutableLiveData<List<ProductModel>>()
+    private var _allProductList = MutableLiveData<List<ProductModel>>()
+    val allProductList :LiveData<List<ProductModel>> get() = _allProductList
+    private var _totalBalance = MutableLiveData<Double>()
+    val totalBalance : LiveData<Double> get() = _totalBalance
     init {
-        allProductList = repo.allProductList
+        _totalBalance = repo.totalBalance
+        _allProductList = repo.allProductList
     }
     fun getAllProducts() = viewModelScope.launch{
         repo.getAllProducts()
     }
     fun updatePiece(id : Int,newPiece : Int) = viewModelScope.launch {
         repo.updatePiece(id,newPiece)
+    }
+    fun getTotalBalance() = viewModelScope.launch {
+        repo.getTotalBalance()
     }
 }
