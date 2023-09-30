@@ -17,6 +17,7 @@ class CartAdapter(val context: Context) : RecyclerView.Adapter<CartAdapter.CartR
     class CartRwViewHolder(val binding : CartRwItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(productModel: ProductModel,plusClick : () -> Unit = {},context: Context){
             with(binding){
+
                 piece = productModel.piece
                 titleText = productModel.title
                 priceText = "$${productModel.price}"

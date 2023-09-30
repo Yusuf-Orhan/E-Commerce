@@ -58,5 +58,4 @@ class CartFragment : Fragment() {
             println("Total balance : $it")
         }
     }
-
 }

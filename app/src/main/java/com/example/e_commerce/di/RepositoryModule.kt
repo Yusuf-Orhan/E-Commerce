@@ -1,10 +1,12 @@
 package com.example.e_commerce.di
 
 import com.example.e_commerce.data.repos.CartRepository
+import com.example.e_commerce.data.repos.FavoriteRepository
 import com.example.e_commerce.data.repos.MainRepository
 import com.example.e_commerce.data.repos.ProfileRepository
 import com.example.e_commerce.data.repos.UserRepository
 import com.example.e_commerce.data.retrofit.RetrofitApi
+import com.example.e_commerce.data.room.FavoriteDao
 import com.example.e_commerce.data.room.ProductDao
 import com.example.e_commerce.data.room.ProductDatabase
 import com.google.firebase.auth.FirebaseAuth
@@ -32,4 +34,8 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideCartRepo(dao : ProductDao) : CartRepository = CartRepository(dao)
+
+    @Provides
+    @Singleton
+    fun provideFavoriteRepo(dao : FavoriteDao) : FavoriteRepository = FavoriteRepository(dao)
 }

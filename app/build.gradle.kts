@@ -48,7 +48,7 @@ val retrofitVersion = "2.9.0"
 val coroutineVersion = "1.7.1"
 val lifecycleVersion = "2.6.1"
 val hiltVersion = "2.44"
-
+val lottieVersion = "6.1.0"
 kapt {
     correctErrorTypes = true
 }
@@ -92,4 +92,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("jp.wasabeef:glide-transformations:4.3.0")
     implementation("jp.co.cyberagent.android:gpuimage:2.1.0")
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
+
 }

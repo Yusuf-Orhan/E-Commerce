@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.bottomNavMain, navHost.findNavController())
 
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.detailFragment) {
+            if (destination.id == R.id.detailFragment || destination.id == R.id.paymentFragment || destination.id == R.id.paymentSuccesFragment) {
                 binding.bottomNavMain.visibility = View.GONE
             } else {
                 binding.bottomNavMain.visibility = View.VISIBLE

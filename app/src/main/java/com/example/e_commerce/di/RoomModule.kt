@@ -3,6 +3,7 @@ package com.example.e_commerce.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.e_commerce.data.room.FavoriteDao
 import com.example.e_commerce.data.room.ProductDao
 import com.example.e_commerce.data.room.ProductDatabase
 import dagger.Module
@@ -20,6 +21,9 @@ object RoomModule {
     fun provideRoomDatabase(@ApplicationContext context : Context)  = Room.databaseBuilder(context,ProductDatabase::class.java,"Database").allowMainThreadQueries().build()
     @Provides
     @Singleton
-    fun provideDao(database: ProductDatabase) : ProductDao = database.productDao()
+    fun provideProductDao(database: ProductDatabase) : ProductDao = database.productDao()
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(database: ProductDatabase) : FavoriteDao = database.favoriteDao()
 }
 

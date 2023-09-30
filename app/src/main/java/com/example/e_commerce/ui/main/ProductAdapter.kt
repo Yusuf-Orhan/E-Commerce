@@ -7,16 +7,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerce.R
 import com.example.e_commerce.common.loadImage
-import com.example.e_commerce.data.model.retrofit.Products
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.databinding.ProductListItemBinding
 
 class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     private val productList = ArrayList<ProductsItem>()
     var onItemClick : (ProductsItem) -> Unit = {}
+    var addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> }
      class ProductViewHolder(val binding : ProductListItemBinding) : RecyclerView.ViewHolder(binding.root){
-         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem,context: Context){
+         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem,context: Context,addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> }){
              with(binding){
+                 checkBox.setOnCheckedChangeListener{ _, isChecked ->
+                     addFavorite(isChecked,productsItem)
+                 }
                  productItemImage.loadImage(url = productsItem.image,context)
                  priceText = "${productsItem.price}$"
                  titleText = productsItem.title
@@ -35,7 +38,7 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
     override fun getItemCount(): Int = productList.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(onItemClick,productList[position], context = context)
+        holder.bind(onItemClick,productList[position], context = context,addFavorite)
     }
     fun loadData(newList : List<ProductsItem>){
         productList.clear()

@@ -45,5 +45,18 @@
         android:id="@+id/paymentFragment"
         android:name="com.example.e_commerce.ui.payment.PaymentFragment"
         android:label="fragment_payment"
-        tools:layout="@layout/fragment_payment" />
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_paymentSuccesFragment"
+            app:destination="@id/paymentSuccesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentSuccesFragment"
+        android:name="com.example.e_commerce.ui.payment.PaymentSuccesFragment"
+        android:label="fragment_payment_succes"
+        tools:layout="@layout/fragment_payment_succes" >
+        <action
+            android:id="@+id/action_paymentSuccesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

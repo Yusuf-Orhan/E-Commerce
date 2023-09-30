@@ -12,14 +12,18 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.common.showSnackbar
+import com.example.e_commerce.common.showToast
+import com.example.e_commerce.data.model.room.FavoriteModel
 import com.example.e_commerce.databinding.FragmentMainBinding
 import com.example.e_commerce.ui.detail.DetailFragmentArgs
+import com.example.e_commerce.ui.favorite.FavoriteViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private val viewModel : MainViewModel by viewModels()
+    private val favoriteViewModel : FavoriteViewModel by viewModels()
     private val productAdapter by lazy { ProductAdapter(requireContext()) }
     lateinit var binding : FragmentMainBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,6 +55,14 @@ class MainFragment : Fragment() {
                         layoutManager = GridLayoutManager(requireContext(),2)
                         adapter = productAdapter.also { adapter ->
                             adapter.loadData(list)
+                            adapter.addFavorite = {isChecked,item ->
+                                val favoriteModel = FavoriteModel(item,isChecked)
+                                if(isChecked){
+                                    favoriteViewModel.addFavorite(favoriteModel)
+                                }else{
+                                    favoriteViewModel.deleteFavorite(favoriteModel)
+                                }
+                            }
                             adapter.onItemClick = {
                                 val action = MainFragmentDirections.actionMainFragmentToDetailFragment(it)
                                 findNavController().navigate(action)
