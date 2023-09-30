@@ -54,6 +54,9 @@ class UserRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,
         }else{
             isEmptySignIn.value = false
             firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+                if(!task.isSuccessful){
+                    println(task.exception?.message)
+                }
                 isSignIn.value = task.isSuccessful
                 isSignIn.value = false
             }

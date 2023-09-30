@@ -58,9 +58,13 @@ class MainFragment : Fragment() {
                             adapter.addFavorite = {isChecked,item ->
                                 val favoriteModel = FavoriteModel(item,isChecked)
                                 if(isChecked){
-                                    favoriteViewModel.addFavorite(favoriteModel)
+                                    favoriteViewModel.addFavorite(favoriteModel).run {
+                                        requireView().showToast("Added Favorite")
+                                    }
                                 }else{
-                                    favoriteViewModel.deleteFavorite(favoriteModel)
+                                    favoriteViewModel.deleteFavorite(favoriteModel).run {
+                                        requireView().showToast("Deleted Favorite")
+                                    }
                                 }
                             }
                             adapter.onItemClick = {

@@ -53,16 +53,9 @@ class DetailFragment : Fragment() {
     }
 
     fun addCartButtonClick(){
-        if (viewModel.isexist.value == true){
-            requireView().showToast("Daha önce kaydedilmiş")
-            findNavController().popBackStack()
-            viewModel.insertItem(productItem,1)
-        }else{
-            findNavController().popBackStack()
-            viewModel.updatePiece(productItem.id,2)
-            requireView().showToast("Daha önce kaydedilmemiş")
-        }
+        viewModel.insertItem(productItem,1)
         requireView().showToast(getString(R.string.success_message2))
+        findNavController().popBackStack()
     }
 
 }
