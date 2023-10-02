@@ -44,7 +44,6 @@ class DetailFragment : Fragment() {
             imageView.loadImage(productItem.image,requireContext())
             category = capitalizeString(productItem.category)
         }
-        viewModel.exists(productItem.id)
     }
     private fun capitalizeString(input: String): String {
         val words = input.split(" ")

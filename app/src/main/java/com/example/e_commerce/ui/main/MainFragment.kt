@@ -7,23 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.common.showSnackbar
-import com.example.e_commerce.common.showToast
-import com.example.e_commerce.data.model.room.FavoriteModel
 import com.example.e_commerce.databinding.FragmentMainBinding
-import com.example.e_commerce.ui.detail.DetailFragmentArgs
 import com.example.e_commerce.ui.favorite.FavoriteViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private val viewModel : MainViewModel by viewModels()
-    private val favoriteViewModel : FavoriteViewModel by viewModels()
     private val productAdapter by lazy { ProductAdapter(requireContext()) }
     lateinit var binding : FragmentMainBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,6 +29,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getData()
         observerLiveData()
+        viewModel.controlIsFavorite()
         with(binding){
             swipeRefreshLayout.setOnRefreshListener {
                 productsProgress.visibility = View.VISIBLE
@@ -46,6 +41,11 @@ class MainFragment : Fragment() {
     }
     private fun observerLiveData(){
         with(viewModel){
+            favoriteModels.observe(viewLifecycleOwner){
+                for (productModel in it) {
+                    productAdapter.isChecked = productModel
+                }
+            }
             productsItemList.observe(viewLifecycleOwner){list ->
                 with(binding){
                     productsProgress.visibility = View.INVISIBLE
@@ -56,16 +56,7 @@ class MainFragment : Fragment() {
                         adapter = productAdapter.also { adapter ->
                             adapter.loadData(list)
                             adapter.addFavorite = {isChecked,item ->
-                                val favoriteModel = FavoriteModel(item,isChecked)
-                                if(isChecked){
-                                    favoriteViewModel.addFavorite(favoriteModel).run {
-                                        requireView().showToast("Added Favorite")
-                                    }
-                                }else{
-                                    favoriteViewModel.deleteFavorite(favoriteModel).run {
-                                        requireView().showToast("Deleted Favorite")
-                                    }
-                                }
+                                viewModel.setFavorite(item.id,isChecked)
                             }
                             adapter.onItemClick = {
                                 val action = MainFragmentDirections.actionMainFragmentToDetailFragment(it)

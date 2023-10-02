@@ -12,14 +12,16 @@ import com.example.e_commerce.databinding.ProductListItemBinding
 
 class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     private val productList = ArrayList<ProductsItem>()
+    var isChecked = false
     var onItemClick : (ProductsItem) -> Unit = {}
     var addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> }
      class ProductViewHolder(val binding : ProductListItemBinding) : RecyclerView.ViewHolder(binding.root){
-         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem,context: Context,addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> }){
+         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem,context: Context,addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> },isChecked : Boolean){
              with(binding){
                  checkBox.setOnCheckedChangeListener{ _, isChecked ->
                      addFavorite(isChecked,productsItem)
                  }
+                 checkBox.isChecked = isChecked
                  productItemImage.loadImage(url = productsItem.image,context)
                  priceText = "${productsItem.price}$"
                  titleText = productsItem.title
@@ -38,7 +40,7 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
     override fun getItemCount(): Int = productList.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(onItemClick,productList[position], context = context,addFavorite)
+        holder.bind(onItemClick,productList[position], context = context,addFavorite,isChecked)
     }
     fun loadData(newList : List<ProductsItem>){
         productList.clear()

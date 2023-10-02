@@ -13,9 +13,12 @@ interface ProductDao {
     @Query("UPDATE ProductModel SET piece = :newPieceValue WHERE id = :productId")
     suspend fun updatePiece(productId: Int, newPieceValue: Int)
 
-    @Query("SELECT EXISTS(SELECT 1 FROM ProductModel WHERE id = :id)")
-    suspend fun exists(id: Int): Boolean
+    @Query("UPDATE ProductModel SET isFavorite = :isFavorite WHERE id = :productId")
+    suspend fun addFavorite(productId: Int, isFavorite: Boolean)
 
+
+    @Query("SELECT isFavorite FROM ProductModel")
+    suspend fun getFavorite() : List<Boolean>
     @Query("SELECT * FROM ProductModel")
     suspend fun getAllCart() : List<ProductModel>
     @Insert

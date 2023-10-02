@@ -16,11 +16,8 @@ class DetailViewModel @Inject constructor(private val repo : CartRepository) : V
     init {
         _isexist = repo.isExists
     }
-    fun insertItem(productsItem: ProductsItem,piece : Int) = viewModelScope.launch {
+    fun insertItem(productsItem: ProductsItem,piece : Int ) = viewModelScope.launch {
         repo.insertItem(productsItem,piece)
-    }
-    fun exists(uid : Int) = viewModelScope.launch {
-        repo.exist(uid)
     }
     fun updatePiece(id : Int,newPiece : Int) = viewModelScope.launch {
         repo.updatePiece(id,newPiece)

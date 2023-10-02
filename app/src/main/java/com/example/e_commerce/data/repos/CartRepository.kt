@@ -20,6 +20,7 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
                 productsItem.category,
                 productsItem.description,
                 productsItem.id,
+                false,
                 productsItem.image,
                 productsItem.price,
                 productsItem.rating.rate,
@@ -28,7 +29,12 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
             )
         )
     }
-
+    suspend fun controlIsFavorite() : List<Boolean>{
+        return dao.getFavorite()
+    }
+    suspend fun setFavorite(itemId : Int,isFavorite : Boolean){
+        dao.addFavorite(itemId,isFavorite)
+    }
     suspend fun getData(): List<ProductModel> {
         return dao.getAllCart()
     }
@@ -41,10 +47,6 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
 
     suspend fun updatePiece(id: Int, newPiece: Int) {
         dao.updatePiece(id, newPiece)
-    }
-
-    suspend fun exist(uid: Int) {
-        isExists.value = dao.exists(uid)
     }
     suspend fun getTotalBalance() {
         dao.getAllCart().forEach {

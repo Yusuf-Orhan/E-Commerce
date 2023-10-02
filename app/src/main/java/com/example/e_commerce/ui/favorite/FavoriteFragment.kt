@@ -12,7 +12,7 @@ import com.example.e_commerce.common.showToast
 import com.example.e_commerce.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class FavoriteFragment : Fragment() {
     lateinit var binding : FragmentFavoriteBinding
     val viewModel : FavoriteViewModel by viewModels()
@@ -23,13 +23,5 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getFavorite()
-        viewModel.favoriteList.observe(viewLifecycleOwner){
-            requireView().showToast("Favorite List Changed")
-            it.forEach { item->
-                println(item.id)
-                println(item.item.title)
-            }
-        }
     }
 }
