@@ -9,6 +9,7 @@ import com.example.e_commerce.common.Constants.PHONE_NUMBER
 import com.example.e_commerce.common.Constants.USER
 import com.example.e_commerce.common.Constants.USER_EMAIL
 import com.example.e_commerce.common.Singleton
+import com.example.e_commerce.ui.user.util.LoginState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,12 +18,11 @@ import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,private val fireStore: FirebaseFirestore){
+    val state = MutableLiveData<LoginState>()
     val isSignUp = MutableLiveData<Boolean>()
     val isEmptySignUp = MutableLiveData<Boolean>()
     val isEmptySignIn = MutableLiveData<Boolean>()
-
     val isSaved = MutableLiveData<Boolean>()
-    val isSignIn = MutableLiveData<Boolean>()
     fun signUp(email : String,password : String,nameLastname : String,phoneNumber : String){
 
         if (email.isEmpty() || password.isEmpty() || nameLastname.isEmpty() || phoneNumber.isEmpty()){
@@ -54,11 +54,12 @@ class UserRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,
         }else{
             isEmptySignIn.value = false
             firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-                if(!task.isSuccessful){
-                    println(task.exception?.message)
+                if(!task.isSuccessful) {
+                    state.value?.copy(isSigned = false)
+                    println("")
+                }else{
+                    state.value?.copy(isSigned = true)
                 }
-                isSignIn.value = task.isSuccessful
-                isSignIn.value = false
             }
         }
 

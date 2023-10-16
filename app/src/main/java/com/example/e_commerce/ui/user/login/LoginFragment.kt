@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.e_commerce.MainActivity
 import com.example.e_commerce.R
+import com.example.e_commerce.common.showSnackbar
 import com.example.e_commerce.common.showToast
 import com.example.e_commerce.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -22,12 +23,12 @@ class LoginFragment : Fragment() {
     lateinit var binding : FragmentLoginBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login,container,false)
+        binding.loginFragment = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loginFragment = this
         observeLiveData()
     }
     fun login(){
@@ -36,14 +37,15 @@ class LoginFragment : Fragment() {
         viewModel.signIn(email, password)
     }
     private fun observeLiveData() = with(viewModel){
-        isSignIn.observe(viewLifecycleOwner){isSignIn ->
-            if (isSignIn){
+        state.observe(viewLifecycleOwner){uiState ->
+            if (uiState.isSigned){
+                requireView().showToast("is Signed")
                 val intent = Intent(context, MainActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
 
             }else{
-              Log.e("LoginFragment","Is sign in error")
+              requireView().showSnackbar("Is Error")
             }
         }
         isEmpty.observe(viewLifecycleOwner){isEmpty ->
