@@ -13,18 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val repo : CartRepository) : ViewModel() {
-    var _isexist = MutableLiveData<Boolean>()
-
-    val item = MutableLiveData<ProductModel>()
-    fun insertItem(productsItem: ProductsItem,piece : Int ) = viewModelScope.launch {
-        repo.insertItem(productsItem,piece)
-    }
-    fun updatePiece(id : Int,newPiece : Int) = viewModelScope.launch {
-        repo.updatePiece(id,newPiece)
-    }
-    fun getItemCart(id : Int){
-        viewModelScope.launch {
-            _isexist.value = repo.getItem(id)
-        }
+    fun insertItem(productsItem: ProductsItem ) = viewModelScope.launch {
+        repo.insertItem(productsItem)
     }
 }

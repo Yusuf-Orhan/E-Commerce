@@ -3,9 +3,7 @@ package com.example.e_commerce.ui.cart
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Untaggable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerce.R
 import com.example.e_commerce.common.loadImage
@@ -14,31 +12,38 @@ import com.example.e_commerce.databinding.CartRwItemBinding
 
 class CartAdapter(val context: Context) : RecyclerView.Adapter<CartAdapter.CartRwViewHolder>() {
     var productList = listOf<ProductModel>()
-    var plusClick : (ProductModel) -> Unit = {}
+    var deleteClick: (ProductModel) -> Unit = {}
 
-    class CartRwViewHolder(val binding : CartRwItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(productModel: ProductModel,plusClick : (ProductModel) -> Unit = {},context: Context){
-            with(binding){
-                piece = productModel.piece
+    class CartRwViewHolder(val binding: CartRwItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(productModel: ProductModel, deleteClick: (ProductModel) -> Unit = {}, context: Context) {
+            with(binding) {
                 titleText = productModel.title
                 priceText = "$${productModel.price}"
-                cartRwImage.loadImage(productModel.image, context = context )
-                plusFab.setOnClickListener {
-                    plusClick(productModel)
+                cartRwImage.loadImage(productModel.image, context = context)
+                binding.deleteButton.setOnClickListener {
+                    deleteClick(productModel)
                 }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartRwViewHolder {
-        val binding = DataBindingUtil.inflate<CartRwItemBinding>(LayoutInflater.from(parent.context),R.layout.cart_rw_item,parent,false)
+        val binding = DataBindingUtil.inflate<CartRwItemBinding>(
+            LayoutInflater.from(parent.context), R.layout.cart_rw_item, parent, false
+        )
         return CartRwViewHolder(binding)
     }
 
     override fun getItemCount(): Int = productList.size
 
     override fun onBindViewHolder(holder: CartRwViewHolder, position: Int) {
-        holder.bind(productList[position], plusClick = { plusClick(productList[position])},context)
+        holder.bind(
+            productList[position], deleteClick = { deleteClick(productList[position]) }, context
+        )
+    }
+    fun loadData(newList : List<ProductModel>){
+        productList = newList
+        notifyDataSetChanged()
     }
 
 }

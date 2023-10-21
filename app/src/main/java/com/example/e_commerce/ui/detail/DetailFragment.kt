@@ -38,7 +38,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         productItem = arguments.productModel
-        viewModel.getItemCart(productItem.id)
         with(binding){
             productModel = productItem
             priceText = "$" + productItem.price.toString()
@@ -53,14 +52,7 @@ class DetailFragment : Fragment() {
     }
 
     fun addCartButtonClick(){
-        if (viewModel._isexist.value == true){
-            val newPiece = productItem.piece + 1
-            requireView().showToast("Daha önce kaydedilmiş")
-            viewModel.updatePiece(productItem.id,newPiece)
-        }else {
-            viewModel.insertItem(productItem,1)
-            requireView().showToast("Daha önce kaydedilmemiş")
-        }
+        viewModel.insertItem(productItem)
         requireView().showToast(getString(R.string.success_message2))
         findNavController().popBackStack()
     }

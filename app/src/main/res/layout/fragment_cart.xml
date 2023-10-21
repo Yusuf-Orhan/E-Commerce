@@ -20,17 +20,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="5dp"
-            android:layout_marginTop="10dp"
             android:id="@+id/cartRw"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/totalBalanceText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/materialToolbar"
-            app:layout_constraintBottom_toTopOf="@+id/gotopaybutton"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/materialToolbar" />
+
+        <TextView
+            android:id="@+id/totalBalanceText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1590.0 $"
+            android:textColor="@color/primaryColor"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/gotopaybutton"
+            app:layout_constraintEnd_toEndOf="@id/gotopaybutton"
+            app:layout_constraintStart_toStartOf="@id/gotopaybutton" />
         <Button
             android:id="@+id/gotopaybutton"
             android:layout_width="0dp"

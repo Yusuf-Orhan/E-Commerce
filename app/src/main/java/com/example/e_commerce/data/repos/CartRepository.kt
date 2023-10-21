@@ -11,10 +11,9 @@ import javax.inject.Inject
 
 class CartRepository @Inject constructor(private val dao: ProductDao) {
     val allProductList = MutableLiveData<List<ProductModel>>()
-    val totalBalance = MutableLiveData<Double>()
-    val isExists = MutableLiveData<Boolean>()
+    val totalBalance = MutableLiveData<Double>(0.0)
 
-    suspend fun insertItem(productsItem: ProductsItem, piece: Int) {
+    suspend fun insertItem(productsItem: ProductsItem) {
         dao.insert(
             productModel = ProductModel(
                 productsItem.category,
@@ -24,39 +23,27 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
                 productsItem.image,
                 productsItem.price,
                 productsItem.rating.rate,
-                piece,
                 productsItem.title
             )
         )
     }
-
+    suspend fun deleteItem(productModel: ProductModel){
+        dao.delete(productModel)
+    }
     suspend fun controlIsFavorite() : List<Boolean>{
         return dao.getFavorite()
     }
     suspend fun setFavorite(itemId : Int,isFavorite : Boolean){
         dao.addFavorite(itemId,isFavorite)
     }
-    suspend fun getData(): List<ProductModel> {
-        return dao.getAllCart()
-    }
-
     suspend fun getAllProducts() {
         dao.getAllCart().also {
             allProductList.value = it
         }
     }
-
-    suspend fun updatePiece(id: Int, newPiece: Int) {
-        dao.updatePiece(id, newPiece)
-    }
     suspend fun getTotalBalance() {
-        var _totalBalance = 0.0
         dao.getAllCart().forEach {
-            _totalBalance += it.price
-            println("(Repos) Total balance : $_totalBalance")
+            totalBalance.value = totalBalance.value?.plus(it.price)
         }
-    }
-    suspend fun getItem(id : Int) : Boolean {
-        return dao.getCartItem(id) != null
     }
 }

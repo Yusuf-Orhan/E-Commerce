@@ -23,7 +23,7 @@ class CartFragment : Fragment() {
     lateinit var binding : FragmentCartBinding
     private val viewModel : CartViewModel by viewModels()
     private val cartAdapter by lazy { CartAdapter(requireContext()) }
-    private var newPiece  : Int? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
         binding.fragmentCart = this
@@ -33,7 +33,7 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllProducts()
-        viewModel.getAllProducts()
+        viewModel.getTotalBalance()
         observeLiveData()
     }
     fun gotoPay(){
@@ -45,12 +45,14 @@ class CartFragment : Fragment() {
             binding.cartRw.adapter = cartAdapter
             cartAdapter.apply {
                 productList = it
-                plusClick = {product ->
-                    newPiece = product.piece + 1
-                    product.piece = product.piece + 1
-                    viewModel.updatePiece(product.id, newPiece = product.piece)
+                deleteClick = {productModel ->
+                    viewModel.deleteItem(productModel)
+                    loadData(it)
                 }
             }
+        }
+        viewModel._totalBalance.observe(viewLifecycleOwner){
+            binding.totalBalanceText.text = "${it.toString()} $"
         }
     }
 }

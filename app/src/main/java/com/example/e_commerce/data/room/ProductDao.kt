@@ -10,9 +10,6 @@ import com.google.android.gms.common.api.Response
 
 @Dao
 interface ProductDao {
-    @Query("UPDATE ProductModel SET piece = :newPieceValue WHERE id = :productId")
-    suspend fun updatePiece(productId: Int, newPieceValue: Int)
-
     @Query("UPDATE ProductModel SET isFavorite = :isFavorite WHERE id = :productId")
     suspend fun addFavorite(productId: Int, isFavorite: Boolean)
     @Query("SELECT isFavorite FROM ProductModel")
@@ -23,6 +20,4 @@ interface ProductDao {
     suspend fun insert(productModel: ProductModel)
     @Delete
     suspend fun delete(productModel: ProductModel)
-    @Query("SELECT * FROM ProductModel WHERE id = :productId")
-    suspend fun getCartItem(productId: Int): ProductModel
 }

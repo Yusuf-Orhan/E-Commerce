@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.data.model.room.ProductModel
 import com.example.e_commerce.data.repos.CartRepository
 import com.example.e_commerce.data.room.ProductDao
@@ -15,8 +16,8 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(private val repo : CartRepository): ViewModel(){
     private var _allProductList = MutableLiveData<List<ProductModel>>()
     val allProductList :LiveData<List<ProductModel>> get() = _allProductList
-    private var _totalBalance = MutableLiveData<Double>()
-    val totalBalance : LiveData<Double> get() = _totalBalance
+    var _totalBalance = MutableLiveData<Double>()
+
     init {
         _totalBalance = repo.totalBalance
         _allProductList = repo.allProductList
@@ -24,10 +25,10 @@ class CartViewModel @Inject constructor(private val repo : CartRepository): View
     fun getAllProducts() = viewModelScope.launch{
         repo.getAllProducts()
     }
-    fun updatePiece(id : Int,newPiece : Int) = viewModelScope.launch {
-        repo.updatePiece(id,newPiece)
-    }
     fun getTotalBalance() = viewModelScope.launch {
         repo.getTotalBalance()
+    }
+    fun deleteItem(productModel : ProductModel) = viewModelScope.launch {
+        repo.deleteItem(productModel)
     }
 }

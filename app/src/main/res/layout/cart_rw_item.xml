@@ -9,9 +9,6 @@
         <variable
             name="priceText"
             type="String" />
-        <variable
-            name="piece"
-            type="Integer" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -36,10 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
             <ImageView
                 android:id="@+id/cartRwImage"
+                android:layout_margin="20dp"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,12 +47,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:lines="2"
                 android:maxLines="2"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:text="@{titleText}"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cartRwImage"
                 app:layout_constraintTop_toTopOf="@+id/cartRwImage" />
@@ -66,53 +61,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 android:text="@{priceText}"
+                android:padding="5dp"
                 android:textColor="@color/primaryColor"
-                app:layout_constraintBottom_toTopOf="@+id/basketCard"
                 app:layout_constraintStart_toStartOf="@+id/titleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
-            <LinearLayout
-                android:id="@+id/basketCard"
-                android:layout_marginTop="5dp"
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/priceTextView"
-                app:layout_constraintStart_toEndOf="@+id/cartRwImage">
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/minus_fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/minus_icon"
-                    android:layout_marginEnd="10dp"
-                    app:fabCustomSize="30dp"
-                    app:tint="@color/white"
-                    android:backgroundTint="@color/primaryColor"/>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/pieceText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/plus_fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_add_circle_24"
-                    app:fabCustomSize="30dp"
-                    app:fabSize="mini"
-                    android:layout_marginStart="10dp"
-                    app:tint="@color/white"
-                    android:backgroundTint="@color/primaryColor"/>
-            </LinearLayout>
+                android:backgroundTint="@color/primaryColor"
+                android:layout_marginEnd="10dp"
+                app:fabSize="mini"
+                app:fabCustomSize="30dp"
+                android:src="@drawable/ic_baseline_delete_outline_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
