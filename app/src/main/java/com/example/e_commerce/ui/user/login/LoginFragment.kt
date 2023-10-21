@@ -39,13 +39,14 @@ class LoginFragment : Fragment() {
     private fun observeLiveData() = with(viewModel){
         state.observe(viewLifecycleOwner){uiState ->
             if (uiState.isSigned){
+                uiState.isSigned = false
                 requireView().showToast("is Signed")
                 val intent = Intent(context, MainActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
 
-            }else{
-              requireView().showSnackbar("Is Error")
+            }else if (uiState.isError){
+                requireView().showToast("Is Error")
             }
         }
         isEmpty.observe(viewLifecycleOwner){isEmpty ->

@@ -52,10 +52,5 @@ class CartFragment : Fragment() {
                 }
             }
         }
-        viewModel.totalBalance.observe(viewLifecycleOwner){
-            requireView().showToast("Total Balance Changed")
-            Log.e("Total Balance","$it")
-            println("Total balance : $it")
-        }
     }
 }

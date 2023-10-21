@@ -18,12 +18,13 @@
     android:layout_height="wrap_content"
     android:padding="5dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,14 +51,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:maxLines="2"
                 android:lines="2"
+                android:maxLines="2"
+                android:padding="5dp"
                 android:text="@{titleText}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toStartOf="@+id/basketLayout"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cartRwImage"
                 app:layout_constraintTop_toTopOf="@+id/cartRwImage" />
 
@@ -67,60 +67,53 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@{priceText}"
-                android:layout_marginBottom="10dp"
                 android:textColor="@color/primaryColor"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/basketCard"
                 app:layout_constraintStart_toStartOf="@+id/titleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/basketLayout"
+            <LinearLayout
+                android:id="@+id/basketCard"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                android:layout_marginEnd="10dp"
-                android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/priceTextView"
+                app:layout_constraintStart_toEndOf="@+id/cartRwImage">
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/minus_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/minus_icon"
+                    android:layout_marginEnd="10dp"
+                    app:fabCustomSize="30dp"
+                    app:tint="@color/white"
+                    android:backgroundTint="@color/primaryColor"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        app:srcCompat="@drawable/baseline_add_circle_24" />
                     <TextView
-                        android:textColor="@color/black"
-                        android:id="@+id/textView"
+                        android:id="@+id/pieceText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginStart="10dp"
-                        android:text="@{piece.toString()}" />
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
+                        android:text="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/minus_icon" />
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/plus_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_add_circle_24"
+                    app:fabCustomSize="30dp"
+                    app:fabSize="mini"
+                    android:layout_marginStart="10dp"
+                    app:tint="@color/white"
+                    android:backgroundTint="@color/primaryColor"/>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

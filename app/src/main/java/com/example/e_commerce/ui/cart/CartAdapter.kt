@@ -3,6 +3,7 @@ package com.example.e_commerce.ui.cart
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.Untaggable
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +15,16 @@ import com.example.e_commerce.databinding.CartRwItemBinding
 class CartAdapter(val context: Context) : RecyclerView.Adapter<CartAdapter.CartRwViewHolder>() {
     var productList = listOf<ProductModel>()
     var plusClick : (ProductModel) -> Unit = {}
-    class CartRwViewHolder(val binding : CartRwItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(productModel: ProductModel,plusClick : () -> Unit = {},context: Context){
-            with(binding){
 
+    class CartRwViewHolder(val binding : CartRwItemBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(productModel: ProductModel,plusClick : (ProductModel) -> Unit = {},context: Context){
+            with(binding){
                 piece = productModel.piece
                 titleText = productModel.title
                 priceText = "$${productModel.price}"
                 cartRwImage.loadImage(productModel.image, context = context )
-                imageButton.setOnClickListener {
-                    plusClick()
+                plusFab.setOnClickListener {
+                    plusClick(productModel)
                 }
             }
         }

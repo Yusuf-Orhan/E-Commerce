@@ -12,7 +12,9 @@ data class ProductModel (
     val image: String,
     val price: Double,
     val rating: Double,
-    var piece : Int,
+    var piece : Int = 0,
     val title: String) {
-    @PrimaryKey(autoGenerate = true) var uid = 1
+    @PrimaryKey(autoGenerate = true)
+    var uid = 0
+
 }

@@ -15,8 +15,6 @@ interface ProductDao {
 
     @Query("UPDATE ProductModel SET isFavorite = :isFavorite WHERE id = :productId")
     suspend fun addFavorite(productId: Int, isFavorite: Boolean)
-
-
     @Query("SELECT isFavorite FROM ProductModel")
     suspend fun getFavorite() : List<Boolean>
     @Query("SELECT * FROM ProductModel")
@@ -25,4 +23,6 @@ interface ProductDao {
     suspend fun insert(productModel: ProductModel)
     @Delete
     suspend fun delete(productModel: ProductModel)
+    @Query("SELECT * FROM ProductModel WHERE id = :productId")
+    suspend fun getCartItem(productId: Int): ProductModel
 }

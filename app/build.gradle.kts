@@ -93,5 +93,7 @@ dependencies {
     implementation("jp.wasabeef:glide-transformations:4.3.0")
     implementation("jp.co.cyberagent.android:gpuimage:2.1.0")
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+    //Basket Layout
+    implementation("com.github.yusufonderd:BasketLayout:1.0")
 
 }

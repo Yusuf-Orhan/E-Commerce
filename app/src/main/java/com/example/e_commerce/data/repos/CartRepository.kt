@@ -29,6 +29,7 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
             )
         )
     }
+
     suspend fun controlIsFavorite() : List<Boolean>{
         return dao.getFavorite()
     }
@@ -49,10 +50,13 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
         dao.updatePiece(id, newPiece)
     }
     suspend fun getTotalBalance() {
+        var _totalBalance = 0.0
         dao.getAllCart().forEach {
-            totalBalance.value?.plus(it.price)
-            println("(Repos) Total balance : ${totalBalance.value}")
+            _totalBalance += it.price
+            println("(Repos) Total balance : $_totalBalance")
         }
     }
-
+    suspend fun getItem(id : Int) : Boolean {
+        return dao.getCartItem(id) != null
+    }
 }
