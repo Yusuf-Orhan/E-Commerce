@@ -12,21 +12,23 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainRepository @Inject constructor(private val api : RetrofitApi){
-    val productsItemList = MutableLiveData<ArrayList<ProductsItem>>()
+class MainRepository @Inject constructor(private val api: RetrofitApi) {
+    val productsItemList = MutableLiveData<List<ProductsItem>>()
     val isLoading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
-    suspend fun getData(){
-        isLoading.value = true
-        val response = api.getProducts()
-        if (response.isSuccessful) {
-            isLoading.value = false
-            error.value = false
-            productsItemList.value = response.body()
-        }else{
-            isLoading.value = false
-            error.value = true
-        }
 
+    suspend fun getData() {
+        isLoading.value = true
+        runCatching {
+            api.getProducts()
+        }.onSuccess { response ->
+            val isSuccessful = response.isSuccessful
+            productsItemList.value = response.body().orEmpty()
+            error.value = isSuccessful.not()
+            isLoading.value = false
+        }.onFailure {
+            error.value = true
+            isLoading.value = false
+        }
     }
 }

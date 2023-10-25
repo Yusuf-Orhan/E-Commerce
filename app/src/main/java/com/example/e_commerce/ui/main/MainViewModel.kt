@@ -19,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repo : MainRepository,private val cartRepository: CartRepository): ViewModel() {
     val favoriteModels = MutableLiveData<List<Boolean>>()
-    private var _productsItemList = MutableLiveData<ArrayList<ProductsItem>>()
-    val productsItemList : LiveData<ArrayList<ProductsItem>>
+    private var _productsItemList = MutableLiveData<List<ProductsItem>>()
+    val productsItemList : LiveData<List<ProductsItem>>
         get() = _productsItemList
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean>

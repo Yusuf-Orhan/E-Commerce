@@ -6,11 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.data.model.room.ProductModel
 import com.example.e_commerce.data.room.ProductDao
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CartRepository @Inject constructor(private val dao: ProductDao) {
-    val allProductList = MutableLiveData<List<ProductModel>>()
     val totalBalance = MutableLiveData<Double>(0.0)
 
     suspend fun insertItem(productsItem: ProductsItem) {
@@ -36,14 +37,14 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
     suspend fun setFavorite(itemId : Int,isFavorite : Boolean){
         dao.addFavorite(itemId,isFavorite)
     }
-    suspend fun getAllProducts() {
-        dao.getAllCart().also {
-            allProductList.value = it
-        }
+    fun getAllProducts(): Flow<List<ProductModel>> {
+       return dao.getAllCart()
     }
-    suspend fun getTotalBalance() {
-        dao.getAllCart().forEach {
-            totalBalance.value = totalBalance.value?.plus(it.price)
+    fun getTotalBalance() {
+        dao.getAllCart().map {
+            it.forEach {
+                totalBalance.value = totalBalance.value?.plus(it.price)
+            }
         }
     }
 }

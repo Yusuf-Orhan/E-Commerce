@@ -6,7 +6,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.data.model.room.ProductModel
-import com.google.android.gms.common.api.Response
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface ProductDao {
@@ -15,9 +16,10 @@ interface ProductDao {
     @Query("SELECT isFavorite FROM ProductModel")
     suspend fun getFavorite() : List<Boolean>
     @Query("SELECT * FROM ProductModel")
-    suspend fun getAllCart() : List<ProductModel>
+    fun getAllCart() : Flow<List<ProductModel>>
     @Insert
     suspend fun insert(productModel: ProductModel)
+
     @Delete
     suspend fun delete(productModel: ProductModel)
 }

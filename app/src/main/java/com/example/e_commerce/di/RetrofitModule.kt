@@ -13,6 +13,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule  {
+
     @Singleton
     @Provides
     fun provideRetrofitApi() : RetrofitApi = Retrofit.Builder()
