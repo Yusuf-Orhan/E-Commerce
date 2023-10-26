@@ -12,10 +12,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,private val firestore: FirebaseFirestore){
-    val userLiveData = MutableLiveData<User>()
-    var email = ""
+    val user = MutableLiveData<User>()
+    private var email = ""
     var name = ""
-    var phoneNumber = ""
+    private var phoneNumber = ""
     fun getUser() : LiveData<User>{
         firestore.collection(USER).document(firebaseAuth.currentUser?.email.toString()).addSnapshotListener { value, error ->
             if (error != null){
@@ -26,13 +26,13 @@ class ProfileRepository @Inject constructor(private val firebaseAuth: FirebaseAu
                     email = userMap?.get(USER_EMAIL) as String
                     name = userMap[NAME] as String
                     phoneNumber = userMap[PHONE_NUMBER] as String
-                    val user = User(name,phoneNumber, email)
-                    userLiveData.value = user
+                    val _user = User(name,phoneNumber, email)
+                    user.value = _user
                 }
 
             }
         }
-        return userLiveData
+        return user
     }
     fun signOut(){
         firebaseAuth.signOut()

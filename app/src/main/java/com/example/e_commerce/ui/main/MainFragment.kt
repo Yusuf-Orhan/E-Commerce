@@ -37,17 +37,17 @@ class MainFragment : Fragment() {
                 viewModel.getData()
                 swipeRefreshLayout.isRefreshing = false
             }
+            tryAgainButton.setOnClickListener {
+                viewModel.getData()
+            }
         }
     }
     private fun observerLiveData(){
         with(viewModel){
-            favoriteModels.observe(viewLifecycleOwner){
-                for (productModel in it) {
-                    productAdapter.isChecked = productModel
-                }
-            }
+
             productsItemList.observe(viewLifecycleOwner){list ->
                 with(binding){
+                    errorView.visibility = View.INVISIBLE
                     productsProgress.visibility = View.INVISIBLE
                     productsRw.visibility = View.VISIBLE
                     productsRw.apply {
@@ -69,6 +69,7 @@ class MainFragment : Fragment() {
             isLoading.observe(viewLifecycleOwner){
                 if (it){
                     with(binding){
+                        errorView.visibility = View.INVISIBLE
                         productsProgress.visibility = View.VISIBLE
                         productsRw.visibility = View.INVISIBLE
                     }
@@ -78,6 +79,7 @@ class MainFragment : Fragment() {
             error.observe(viewLifecycleOwner){
                 if (it){
                     with(binding){
+                        errorView.visibility = View.VISIBLE
                         productsProgress.visibility = View.INVISIBLE
                         productsRw.visibility = View.INVISIBLE
                         requireView().showSnackbar(getString(R.string.error_message))

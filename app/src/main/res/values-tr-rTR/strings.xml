@@ -19,11 +19,13 @@
     <string name="categories_text">Kategoriler</string>
     <string name="add_cart_button_text">Sepete Ekle</string>
     <string name="success_message2">İşlem başarılı!</string>
-    <string name="gotopaytext">Goto Pay</string>
+    <string name="gotopaytext">Ödeme Yap</string>
 
     <string name="name_text">Adınız :</string>
     <string name="email_text">E-Posta :</string>
     <string name="phone_text">Tel :</string>
+    <string name="try_again">Yeniden Dene</string>
+    <string name="welcome">Hoşgeldiniz 👋🏻</string>
     <string-array name="titleList">
         <item>Giriş Yap</item>
         <item>Kayıt Ol</item>
