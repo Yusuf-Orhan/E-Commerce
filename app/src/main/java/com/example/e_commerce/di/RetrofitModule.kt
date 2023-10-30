@@ -1,7 +1,7 @@
 package com.example.e_commerce.di
 
 import com.example.e_commerce.common.Constants.BASE_URL
-import com.example.e_commerce.data.retrofit.RetrofitApi
+import com.example.e_commerce.data.remote.RetrofitApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

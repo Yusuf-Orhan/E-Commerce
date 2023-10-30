@@ -1,4 +1,4 @@
-package com.example.e_commerce.data.retrofit
+package com.example.e_commerce.data.remote
 
 
 

@@ -8,6 +8,8 @@
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/baseline_favorite_border_24"
         android:title="@string/bottom_nav_favorite" />
+
+
     <item
         android:id="@+id/cartFragment"
         android:icon="@drawable/baseline_shopping_cart_checkout_24"

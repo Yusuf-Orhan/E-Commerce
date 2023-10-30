@@ -1,5 +1,7 @@
-package com.example.e_commerce.data.room
+package com.example.e_commerce.data.local
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -16,10 +18,10 @@ interface ProductDao {
     @Query("SELECT isFavorite FROM ProductModel")
     suspend fun getFavorite() : List<Boolean>
     @Query("SELECT * FROM ProductModel")
-    fun getAllCart() : Flow<List<ProductModel>>
+    fun getAllCart() : LiveData<List<ProductModel>>
     @Insert
     suspend fun insert(productModel: ProductModel)
 
-    @Delete
-    suspend fun delete(productModel: ProductModel)
+    @Query("DELETE FROM productmodel WHERE id = :uid")
+    suspend fun delete(uid: Int)
 }

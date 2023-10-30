@@ -2,17 +2,19 @@ package com.example.e_commerce.data.repos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.data.model.room.ProductModel
-import com.example.e_commerce.data.room.ProductDao
+import com.example.e_commerce.data.local.ProductDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CartRepository @Inject constructor(private val dao: ProductDao) {
     val totalBalance = MutableLiveData<Double>(0.0)
+    val productList: LiveData<List<ProductModel>>
+        get() {
+            return dao.getAllCart()
+        }
 
     suspend fun insertItem(productsItem: ProductsItem) {
         dao.insert(
@@ -28,23 +30,26 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
             )
         )
     }
-    suspend fun deleteItem(productModel: ProductModel){
-        dao.delete(productModel)
+
+    suspend fun deleteItem(id: Int) {
+        dao.delete(id)
     }
-    suspend fun controlIsFavorite() : List<Boolean>{
+
+    suspend fun controlIsFavorite(): List<Boolean> {
         return dao.getFavorite()
     }
-    suspend fun setFavorite(itemId : Int,isFavorite : Boolean){
-        dao.addFavorite(itemId,isFavorite)
+
+    suspend fun setFavorite(itemId: Int, isFavorite: Boolean) {
+        dao.addFavorite(itemId, isFavorite)
     }
-    fun getAllProducts(): Flow<List<ProductModel>> {
-       return dao.getAllCart()
+
+    fun getAllProducts() {
+        dao.getAllCart()
     }
+
     fun getTotalBalance() {
-        dao.getAllCart().map {
-            it.forEach {
-                totalBalance.value = totalBalance.value?.plus(it.price)
-            }
+        dao.getAllCart()?.value?.forEach {
+            totalBalance.value = totalBalance.value?.plus(it.price)
         }
     }
 }

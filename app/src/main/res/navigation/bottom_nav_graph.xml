@@ -38,8 +38,10 @@
             android:name="productModel"
             app:argType="com.example.e_commerce.data.model.retrofit.ProductsItem" />
         <action
-            android:id="@+id/action_detailFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            android:id="@+id/action_detailFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"

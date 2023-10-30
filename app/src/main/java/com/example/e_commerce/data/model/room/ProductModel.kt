@@ -1,5 +1,6 @@
 package com.example.e_commerce.data.model.room
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,12 +8,12 @@ import androidx.room.PrimaryKey
 data class ProductModel (
     val category: String,
     val description: String,
-    val id: Int,
+    val uid : Int,
     val isFavorite : Boolean = false,
     val image: String,
     val price: Double,
     val rating: Double,
     val title: String) {
     @PrimaryKey(autoGenerate = true)
-    var uid = 0
+    var id: Int = 0
 }

@@ -6,23 +6,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.favorite.FavoriteFragment"
-        tools:ignore="MissingClass">
+        tools:context=".ui.favorite.FavoriteFragment">
 
-        <com.yonder.basketlayout.BasketLayoutView
-            android:id="@+id/basketView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/composeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="#dddddd"
-            app:strokeWidth="1dp"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.5">
+
+        </androidx.compose.ui.platform.ComposeView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

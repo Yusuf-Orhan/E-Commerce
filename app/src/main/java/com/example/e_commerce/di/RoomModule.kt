@@ -2,8 +2,8 @@ package com.example.e_commerce.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.e_commerce.data.room.ProductDao
-import com.example.e_commerce.data.room.ProductDatabase
+import com.example.e_commerce.data.local.ProductDao
+import com.example.e_commerce.data.local.ProductDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +16,8 @@ import javax.inject.Singleton
 object RoomModule {
     @Provides
     @Singleton
-    fun provideRoomDatabase(@ApplicationContext context : Context)  = Room.databaseBuilder(context,ProductDatabase::class.java,"Database").allowMainThreadQueries().build()
+    fun provideRoomDatabase(@ApplicationContext context : Context)  = Room.databaseBuilder(context,
+        ProductDatabase::class.java,"Database").allowMainThreadQueries().build()
     @Provides
     @Singleton
     fun provideProductDao(database: ProductDatabase) : ProductDao = database.productDao()
