@@ -37,7 +37,7 @@
             android:id="@+id/totalBalanceText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="1590.0 $"
+            android:text="0.0 $"
             android:textColor="@color/primaryColor"
             android:textSize="24sp"
             android:textStyle="bold"

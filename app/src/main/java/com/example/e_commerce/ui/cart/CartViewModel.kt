@@ -28,11 +28,11 @@ class CartViewModel @Inject constructor(private val repo : CartRepository): View
     }
     fun getTotalBalance() = viewModelScope.launch {
         repo.getTotalBalance()
-
     }
 
     fun deleteItem(id : Int) = viewModelScope.launch {
         repo.deleteItem(id)
+        getAllProducts()
     }
 
 

@@ -34,7 +34,13 @@ class CartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllProducts()
         viewModel.getTotalBalance()
-        observeLiveData()
+        observes()
+        binding.cartRw.adapter = cartAdapter
+        with(viewModel){
+            cartAdapter.deleteClick = {
+                deleteItem(it)
+            }
+        }
     }
 
     fun gotoPay() {
@@ -42,16 +48,12 @@ class CartFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun observeLiveData() {
+    private fun observes() {
         viewModel.allProductList.observe(viewLifecycleOwner) {
-            binding.cartRw.adapter = cartAdapter
-            cartAdapter.apply {
-                productList = it
-                deleteClick = { productModel ->
-                    viewModel.deleteItem(productModel.id)
-                }
-            }
-
+            cartAdapter.loadData(it)
+        }
+        viewModel._totalBalance.observe(viewLifecycleOwner){
+            binding.totalBalanceText.text = it.toString().format("%.3f\$")
         }
     }
 }

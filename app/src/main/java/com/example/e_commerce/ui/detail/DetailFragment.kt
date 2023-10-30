@@ -54,7 +54,7 @@ class DetailFragment : Fragment() {
     fun addCartButtonClick(){
         viewModel.insertItem(productItem)
         requireView().showToast(getString(R.string.success_message2))
-        val action = DetailFragmentDirections.actionDetailFragmentToCartFragment()
+        val action = DetailFragmentDirections.actionDetailFragmentToMainFragment()
         findNavController().navigate(action)
     }
 

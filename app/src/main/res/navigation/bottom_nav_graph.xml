@@ -42,6 +42,9 @@
             app:destination="@id/cartFragment"
             app:popUpTo="@id/detailFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detailFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"

@@ -48,8 +48,9 @@ class CartRepository @Inject constructor(private val dao: ProductDao) {
     }
 
     fun getTotalBalance() {
-        dao.getAllCart()?.value?.forEach {
+        dao.getAllCart().value?.forEach {
             totalBalance.value = totalBalance.value?.plus(it.price)
+            println("Total Balance : ${totalBalance.value}")
         }
     }
 }

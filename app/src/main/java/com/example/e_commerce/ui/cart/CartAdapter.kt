@@ -13,17 +13,17 @@ import com.example.e_commerce.databinding.CartRwItemBinding
 
 
 class CartAdapter(val context: Context) : RecyclerView.Adapter<CartAdapter.CartRwViewHolder>() {
-    var productList = listOf<ProductModel>()
-    var deleteClick: (ProductModel) -> Unit = {}
+    private val productList = arrayListOf<ProductModel>()
+    var deleteClick: (Int) -> Unit = {}
 
     class CartRwViewHolder(val binding: CartRwItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(productModel: ProductModel, deleteClick: (ProductModel) -> Unit = {}, context: Context) {
+        fun bind(productModel: ProductModel, deleteClick: (Int) -> Unit = {}, context: Context) {
             with(binding) {
                 titleText = productModel.title
                 priceText = "$${productModel.price}"
                 cartRwImage.loadImage(productModel.image, context = context)
                 binding.deleteButton.setOnClickListener {
-                    deleteClick(productModel)
+                    deleteClick(productModel.id)
                 }
             }
         }
@@ -40,11 +40,12 @@ class CartAdapter(val context: Context) : RecyclerView.Adapter<CartAdapter.CartR
 
     override fun onBindViewHolder(holder: CartRwViewHolder, position: Int) {
         holder.bind(
-            productList[position], deleteClick = { deleteClick(productList[position]) }, context
+            productList[position], deleteClick = { deleteClick(productList[position].id) }, context
         )
     }
     fun loadData(newList : List<ProductModel>){
-        productList = newList
+        productList.clear()
+        productList.addAll(newList)
         notifyDataSetChanged()
     }
 
