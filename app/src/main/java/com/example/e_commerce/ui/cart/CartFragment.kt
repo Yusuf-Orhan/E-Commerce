@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.e_commerce.R
+import com.example.e_commerce.common.showAlert
 import com.example.e_commerce.common.showToast
 import com.example.e_commerce.databinding.FragmentCartBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,9 +37,11 @@ class CartFragment : Fragment() {
         viewModel.getTotalBalance()
         observes()
         binding.cartRw.adapter = cartAdapter
-        with(viewModel){
-            cartAdapter.deleteClick = {
-                deleteItem(it)
+        with(viewModel) {
+            cartAdapter.deleteClick = { itemId ->
+                requireView().showAlert(msg = "Are you sure delete?", positiveBtnOnClick = {
+                    deleteItem(itemId)
+                })
             }
         }
     }
@@ -52,8 +55,8 @@ class CartFragment : Fragment() {
         viewModel.allProductList.observe(viewLifecycleOwner) {
             cartAdapter.loadData(it)
         }
-        viewModel._totalBalance.observe(viewLifecycleOwner){
-            binding.totalBalanceText.text = it.toString().format("%.3f\$")
+        viewModel.totalBalance.observe(viewLifecycleOwner) {
+            binding.totalBalanceText.text = it.toString().format("%.3f$")
         }
     }
 }

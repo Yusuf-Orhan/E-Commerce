@@ -10,39 +10,47 @@ import com.example.e_commerce.common.loadImage
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.databinding.ProductListItemBinding
 
-class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(val context: Context) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     private val productList = ArrayList<ProductsItem>()
     var isChecked = false
-    var onItemClick : (ProductsItem) -> Unit = {}
-    var addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> }
-     class ProductViewHolder(val binding : ProductListItemBinding) : RecyclerView.ViewHolder(binding.root){
-         fun bind(onClick : (ProductsItem) -> Unit = {},productsItem: ProductsItem,context: Context,addFavorite : (Boolean,ProductsItem) -> Unit = { b: Boolean, productsItem: ProductsItem -> },isChecked : Boolean){
-             with(binding){
-                 checkBox.setOnCheckedChangeListener{ _, isChecked ->
-                     addFavorite(isChecked,productsItem)
-                 }
-                 checkBox.isChecked = isChecked
-                 productItemImage.loadImage(url = productsItem.image,context)
-                 priceText = "${productsItem.price}$"
-                 titleText = productsItem.title
-                 rootView.setOnClickListener{
-                     onClick(productsItem)
-                 }
-             }
-         }
+    var onItemClick: (ProductsItem) -> Unit = {}
+
+    class ProductViewHolder(val binding: ProductListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            onClick: (ProductsItem) -> Unit = {},
+            productsItem: ProductsItem,
+            context: Context
+        ) {
+            with(binding) {
+                productItemImage.loadImage(url = productsItem.image, context)
+                priceText = "${productsItem.price}$"
+                titleText = productsItem.title
+                rootView.setOnClickListener {
+                    onClick(productsItem)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding = DataBindingUtil.inflate<ProductListItemBinding>(LayoutInflater.from(parent.context),R.layout.product_list_item,parent,false)
+        val binding = DataBindingUtil.inflate<ProductListItemBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.product_list_item,
+            parent,
+            false
+        )
         return ProductViewHolder(binding)
     }
 
     override fun getItemCount(): Int = productList.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(onItemClick,productList[position], context = context,addFavorite,isChecked)
+        holder.bind(onItemClick, productList[position], context = context)
     }
-    fun loadData(newList : List<ProductsItem>){
+
+    fun loadData(newList: List<ProductsItem>) {
         productList.clear()
         productList.addAll(newList)
         println(productList.size)

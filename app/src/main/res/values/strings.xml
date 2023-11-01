@@ -19,6 +19,8 @@
     <string name="error_message">Error!</string>
     <string name="categories_text">Categories</string>
     <string name="success_message2">Transaction successful!</string>
+    <string name="okay">OK</string>
+    <string name="cancel">Cancel</string>
 
     <string name="blanks_error">Please fill in the blanks</string>
     <string name="add_cart_button_text">Add Cart</string>
@@ -27,9 +29,8 @@
         <item>Login</item>
         <item>Signup</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="try_again">Try Again</string>
     <string name="todo" translatable="false">TODO</string>
     <string name="welcome">Welcome 👋🏻</string>
+    <string name="are_you_sure">Are you sure want to delete?</string>
 </resources>

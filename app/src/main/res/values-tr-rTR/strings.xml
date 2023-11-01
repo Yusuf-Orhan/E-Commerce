@@ -26,8 +26,13 @@
     <string name="phone_text">Tel :</string>
     <string name="try_again">Yeniden Dene</string>
     <string name="welcome">Hoşgeldiniz 👋🏻</string>
+    <string name="okay">Tamam</string>
+    <string name="cancel">İptal</string>
+    <string name="are_you_sure">Silmek istedğinize emin misniz?</string>
+
     <string-array name="titleList">
         <item>Giriş Yap</item>
         <item>Kayıt Ol</item>
     </string-array>
+
 </resources>

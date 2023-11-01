@@ -40,7 +40,7 @@ class DetailFragment : Fragment() {
         productItem = arguments.productModel
         with(binding){
             productModel = productItem
-            priceText = "$" + productItem.price.toString()
+            priceText = "${productItem.price}$"
             imageView.loadImage(productItem.image,requireContext())
             category = capitalizeString(productItem.category)
         }

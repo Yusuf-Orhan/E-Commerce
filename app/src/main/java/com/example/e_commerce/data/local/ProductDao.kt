@@ -13,12 +13,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
+
+
+    @Query("SELECT price FROM productmodel")
+    suspend fun getTotalAmount(): List<Double>
+
     @Query("UPDATE ProductModel SET isFavorite = :isFavorite WHERE id = :productId")
     suspend fun addFavorite(productId: Int, isFavorite: Boolean)
+
     @Query("SELECT isFavorite FROM ProductModel")
-    suspend fun getFavorite() : List<Boolean>
+    suspend fun getFavorite(): List<Boolean>
+
     @Query("SELECT * FROM ProductModel")
-    fun getAllCart() : LiveData<List<ProductModel>>
+    fun getAllCart(): LiveData<List<ProductModel>>
+
     @Insert
     suspend fun insert(productModel: ProductModel)
 
