@@ -1,5 +1,6 @@
 package com.example.e_commerce.ui.detail
 
+import android.graphics.Color
 import android.media.Rating
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.graphics.toColor
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
@@ -43,6 +45,13 @@ class DetailFragment : Fragment() {
             priceText = "${productItem.price}$"
             imageView.loadImage(productItem.image,requireContext())
             category = capitalizeString(productItem.category)
+            backImage.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            favoriteImage.setOnClickListener {
+                viewModel.insertItem(productItem)
+                favoriteImage.setImageResource(R.drawable.ic_favorite_selected)
+            }
         }
     }
     private fun capitalizeString(input: String): String {

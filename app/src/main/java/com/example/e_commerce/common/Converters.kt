@@ -5,7 +5,7 @@ import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.google.gson.Gson
 
 class Converters {
-    val gson = Gson()
+    private val gson = Gson()
     @TypeConverter
     fun fromProductsItem(item: ProductsItem): String {
         return gson.toJson(item)

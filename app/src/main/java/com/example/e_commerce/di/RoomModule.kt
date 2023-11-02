@@ -2,6 +2,7 @@ package com.example.e_commerce.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.e_commerce.data.local.FavoriteDao
 import com.example.e_commerce.data.local.ProductDao
 import com.example.e_commerce.data.local.ProductDatabase
 import dagger.Module
@@ -21,5 +22,8 @@ object RoomModule {
     @Provides
     @Singleton
     fun provideProductDao(database: ProductDatabase) : ProductDao = database.productDao()
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(database: ProductDatabase) : FavoriteDao = database.favoriteDao()
 }
 
