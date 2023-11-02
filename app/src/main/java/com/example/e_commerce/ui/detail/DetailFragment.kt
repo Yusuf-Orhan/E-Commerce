@@ -24,6 +24,12 @@ import com.example.e_commerce.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
+/*TODO : viewmodel deki insert item fonksiyonunda daha önce böyle bir ürünün kaydedilip kaydedilmediği kontrol edilecek eğer kaydedildiyse favorite tablosundan bunu
+    silecek eğer kaydedilmediyse kaydedecek
+ */
+
+
+
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
     lateinit var binding: FragmentDetailBinding
