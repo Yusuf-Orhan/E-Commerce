@@ -1,4 +1,4 @@
-package com.example.e_commerce.data.repos
+package com.example.e_commerce.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.e_commerce.data.model.retrofit.ProductsItem

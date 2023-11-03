@@ -1,20 +1,13 @@
-package com.example.e_commerce.data.repos
+package com.example.e_commerce.data.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.e_commerce.common.Constants
 import com.example.e_commerce.common.Constants.NAME
 import com.example.e_commerce.common.Constants.PHONE_NUMBER
 import com.example.e_commerce.common.Constants.USER
 import com.example.e_commerce.common.Constants.USER_EMAIL
-import com.example.e_commerce.common.Singleton
 import com.example.e_commerce.ui.user.util.LoginState
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,private val fireStore: FirebaseFirestore){

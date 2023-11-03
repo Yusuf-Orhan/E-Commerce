@@ -46,6 +46,8 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         productItem = arguments.productModel
+        viewModel.controlFavorite(productItem.id)
+        observes()
         with(binding){
             productModel = productItem
             priceText = "${productItem.price}$"
@@ -55,8 +57,8 @@ class DetailFragment : Fragment() {
                 findNavController().popBackStack()
             }
             favoriteImage.setOnClickListener {
-                viewModel.insertItem(productItem)
-                favoriteImage.setImageResource(R.drawable.ic_favorite_selected)
+                viewModel.addFavorite(productItem.id,productItem)
+                viewModel.controlFavorite(productItem.id)
             }
         }
     }
@@ -66,11 +68,19 @@ class DetailFragment : Fragment() {
         return capitalizedWords.joinToString(" ")
     }
 
-    fun addCartButtonClick(){
-        viewModel.insertItem(productItem)
+    fun addCart(){
+        viewModel.addCart(productItem)
         requireView().showToast(getString(R.string.success_message2))
         val action = DetailFragmentDirections.actionDetailFragmentToMainFragment()
         findNavController().navigate(action)
     }
-
+    private fun observes(){
+        viewModel.isFavorite.observe(viewLifecycleOwner){
+            if (it){
+                binding.favoriteImage.setImageResource(R.drawable.ic_favorite_selected)
+            }else{
+                binding.favoriteImage.setImageResource(R.drawable.ic_favorite_unselected)
+            }
+        }
+    }
 }

@@ -1,18 +1,13 @@
 package com.example.e_commerce.ui.main
 
-import android.provider.LiveFolders
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.e_commerce.data.model.retrofit.Products
 import com.example.e_commerce.data.model.retrofit.ProductsItem
-import com.example.e_commerce.data.model.room.ProductModel
-import com.example.e_commerce.data.repos.CartRepository
-import com.example.e_commerce.data.repos.MainRepository
+import com.example.e_commerce.data.repository.CartRepository
+import com.example.e_commerce.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,9 +32,7 @@ class MainViewModel @Inject constructor(private val repo : MainRepository,privat
     fun getData() = viewModelScope.launch{
         repo.getData()
     }
-    fun setFavorite(itemId : Int,isFavorite : Boolean) = viewModelScope.launch {
-        cartRepository.setFavorite(itemId,isFavorite)
-    }
+
     fun controlIsFavorite() = viewModelScope.launch{
         favoriteModels.value = cartRepository.controlIsFavorite()
     }

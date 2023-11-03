@@ -96,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:text="@string/add_cart_button_text"
-            android:onClick="@{() -> detailFragment.addCartButtonClick()}"
+            android:onClick="@{() -> detailFragment.addCart()}"
             android:layout_margin="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

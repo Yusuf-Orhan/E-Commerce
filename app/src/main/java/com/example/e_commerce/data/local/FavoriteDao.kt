@@ -10,7 +10,9 @@ import com.example.e_commerce.data.model.room.FavoriteModel
 @Dao
 interface FavoriteDao {
     @Query("SELECT * FROM favorite")
-    suspend fun getFavorite() : List<FavoriteModel>
+    suspend fun getAllFavorite() : List<FavoriteModel>
+    @Query("SELECT * FROM favorite WHERE uid = :id")
+    suspend fun getCurrentFavorite(id : Int) : FavoriteModel?
     @Insert
     suspend fun insertFavorite(favoriteModel: FavoriteModel)
     @Delete

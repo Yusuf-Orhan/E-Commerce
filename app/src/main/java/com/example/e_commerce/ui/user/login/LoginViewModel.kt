@@ -3,7 +3,7 @@ package com.example.e_commerce.ui.user.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.e_commerce.data.repos.UserRepository
+import com.example.e_commerce.data.repository.UserRepository
 import com.example.e_commerce.ui.user.util.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

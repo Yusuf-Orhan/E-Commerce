@@ -8,6 +8,7 @@ import com.example.e_commerce.data.model.retrofit.ProductsItem
 
 @Entity(tableName = "favorite")
 data class FavoriteModel(
+    val uid : Int,
     val productsItem: ProductsItem
 ){
     @PrimaryKey(autoGenerate = true)

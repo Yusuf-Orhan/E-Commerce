@@ -1,10 +1,10 @@
 package com.example.e_commerce.di
 
-import com.example.e_commerce.data.repos.CartRepository
+import com.example.e_commerce.data.repository.CartRepository
 
-import com.example.e_commerce.data.repos.MainRepository
-import com.example.e_commerce.data.repos.ProfileRepository
-import com.example.e_commerce.data.repos.UserRepository
+import com.example.e_commerce.data.repository.MainRepository
+import com.example.e_commerce.data.repository.ProfileRepository
+import com.example.e_commerce.data.repository.UserRepository
 import com.example.e_commerce.data.remote.RetrofitApi
 import com.example.e_commerce.data.local.ProductDao
 import com.google.firebase.auth.FirebaseAuth

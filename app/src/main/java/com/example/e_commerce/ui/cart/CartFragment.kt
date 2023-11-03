@@ -56,7 +56,7 @@ class CartFragment : Fragment() {
             cartAdapter.loadData(it)
         }
         viewModel.totalBalance.observe(viewLifecycleOwner) {
-            binding.totalBalanceText.text = it.toString().format("%.3f$")
+            binding.totalBalanceText.text = "${it.toInt()} $"
         }
     }
 }
