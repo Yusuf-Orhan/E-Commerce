@@ -33,4 +33,6 @@
     <string name="todo" translatable="false">TODO</string>
     <string name="welcome">Welcome 👋🏻</string>
     <string name="are_you_sure">Are you sure want to delete?</string>
+    <string name="total_amount">Total Amount :</string>
+    <string name="continue_shopping">Continue Shopping</string>
 </resources>

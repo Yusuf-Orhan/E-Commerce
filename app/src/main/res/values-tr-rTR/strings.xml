@@ -29,6 +29,8 @@
     <string name="okay">Tamam</string>
     <string name="cancel">İptal</string>
     <string name="are_you_sure">Silmek istedğinize emin misniz?</string>
+    <string name="total_amount">Toplam Tutar :</string>
+    <string name="continue_shopping">Alışverişe Devam Et</string>
 
     <string-array name="titleList">
         <item>Giriş Yap</item>

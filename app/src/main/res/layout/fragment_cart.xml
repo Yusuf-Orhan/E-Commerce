@@ -41,13 +41,25 @@
             android:textColor="@color/primaryColor"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/gotopaybutton"
-            app:layout_constraintEnd_toEndOf="@id/gotopaybutton"
-            app:layout_constraintStart_toStartOf="@id/gotopaybutton" />
-        <Button
-            android:id="@+id/gotopaybutton"
-            android:layout_width="0dp"
+            app:layout_constraintBottom_toTopOf="@id/pay_button"
+            app:layout_constraintEnd_toEndOf="@id/pay_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/total_amount"
+            android:textColor="@color/primaryColor"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/pay_button"
+            app:layout_constraintStart_toStartOf="@id/pay_button"
+            />
+
+        <Button
+            style="@style/ButtonTheme"
+            android:id="@+id/pay_button"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:onClick="@{() -> fragmentCart.gotoPay()}"

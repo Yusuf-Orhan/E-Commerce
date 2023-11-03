@@ -17,6 +17,7 @@
             type="String" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.detail.DetailFragment">
@@ -35,8 +36,7 @@
             android:src="@drawable/ic_favorite_unselected"
             android:padding="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -91,9 +91,10 @@
             android:layout_marginBottom="10dp"
             android:text="@{priceText}"/>
         <Button
+            style="@style/ButtonTheme"
             android:id="@+id/addCartButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:text="@string/add_cart_button_text"
             android:onClick="@{() -> detailFragment.addCartButtonClick()}"
             android:layout_margin="20dp"

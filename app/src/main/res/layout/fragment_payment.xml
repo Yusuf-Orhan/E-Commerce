@@ -210,16 +210,15 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
+        style="@style/ButtonTheme"
         android:id="@+id/btn_pay_now"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="12dp"
         android:onClick="@{() -> paymentFragment.payNow()}"
         android:layout_marginBottom="28dp"
         android:backgroundTint="@color/primaryColor"
         android:text="Pay Now"
-        android:textAllCaps="false"
-        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
