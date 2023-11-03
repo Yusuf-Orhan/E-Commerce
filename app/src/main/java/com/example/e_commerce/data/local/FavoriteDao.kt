@@ -15,6 +15,6 @@ interface FavoriteDao {
     suspend fun getCurrentFavorite(id : Int) : FavoriteModel?
     @Insert
     suspend fun insertFavorite(favoriteModel: FavoriteModel)
-    @Delete
-    suspend fun deleteFavorite(favoriteModel: FavoriteModel)
+    @Query("DELETE FROM favorite WHERE uid = :id")
+    suspend fun delete(id: Int)
 }

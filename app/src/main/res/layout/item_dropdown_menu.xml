@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:maxLines="1"
-    android:padding="@dimen/_6sdp"
+    android:padding="6dp"
     android:textAppearance="?attr/textAppearanceSubtitle1"
-    android:textColor="@color/blue" />
+    android:textColor="@color/primaryColor" />

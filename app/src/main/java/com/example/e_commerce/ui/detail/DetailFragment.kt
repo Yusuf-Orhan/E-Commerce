@@ -58,7 +58,6 @@ class DetailFragment : Fragment() {
             }
             favoriteImage.setOnClickListener {
                 viewModel.addFavorite(productItem.id,productItem)
-                viewModel.controlFavorite(productItem.id)
             }
         }
     }

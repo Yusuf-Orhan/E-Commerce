@@ -16,7 +16,8 @@ class DetailViewModel @Inject constructor(private val favoriteRepo : FavoriteRep
         isFavorite = favoriteRepo.isFavorite
     }
     fun addFavorite(id : Int,productsItem: ProductsItem ) = viewModelScope.launch {
-        favoriteRepo.insertFavorite(productsItem,id)
+        if (isFavorite.value == true) favoriteRepo.deleteFavorite(id)
+        else favoriteRepo.insertFavorite(productsItem,id)
     }
 
     fun addCart(productItem: ProductsItem) = viewModelScope.launch{
