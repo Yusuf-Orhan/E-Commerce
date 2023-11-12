@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.common.showSnackbar
+import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.databinding.FragmentMainBinding
 import com.example.e_commerce.ui.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,66 +32,56 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getData()
         observerLiveData()
         viewModel.controlIsFavorite()
         with(binding) {
             swipeRefreshLayout.setOnRefreshListener {
-                productsProgress.visibility = View.VISIBLE
-                productsRw.visibility = View.INVISIBLE
-                viewModel.getData()
+                viewModel.handleEvent(MainEvent.IsRefreshed)
                 swipeRefreshLayout.isRefreshing = false
             }
             tryAgainButton.setOnClickListener {
-                viewModel.getData()
+                viewModel.handleEvent(MainEvent.TryAgain)
             }
         }
     }
 
     private fun observerLiveData() {
         with(viewModel) {
-
-            productsItemList.observe(viewLifecycleOwner) { list ->
-                with(binding) {
-                    errorView.visibility = View.INVISIBLE
-                    productsProgress.visibility = View.INVISIBLE
-                    productsRw.visibility = View.VISIBLE
-                    productsRw.apply {
-                        setHasFixedSize(true)
-                        layoutManager = GridLayoutManager(requireContext(), 2)
-                        adapter = productAdapter.also { adapter ->
-                            adapter.loadData(list)
-                            adapter.onItemClick = {
-                                val action =
-                                    MainFragmentDirections.actionMainFragmentToDetailFragment(it)
-                                findNavController().navigate(action)
-                            }
-                        }
-                    }
-                }
-            }
-            isLoading.observe(viewLifecycleOwner) {
-                if (it) {
+            state.observe(viewLifecycleOwner) { state ->
+                if (state.isLoading == true) {
                     with(binding) {
                         errorView.visibility = View.INVISIBLE
                         productsProgress.visibility = View.VISIBLE
                         productsRw.visibility = View.INVISIBLE
-                    }
-                }
 
-            }
-            error.observe(viewLifecycleOwner) {
-                if (it) {
+                    }
+                } else if (state.isError != null) {
                     with(binding) {
                         errorView.visibility = View.VISIBLE
                         productsProgress.visibility = View.INVISIBLE
                         productsRw.visibility = View.INVISIBLE
                         requireView().showSnackbar(getString(R.string.error_message))
                     }
+                } else if (state.products != null) {
+                    with(binding) {
+                        errorView.visibility = View.INVISIBLE
+                        productsProgress.visibility = View.INVISIBLE
+                        productsRw.visibility = View.VISIBLE
+                        productsRw.apply {
+                            setHasFixedSize(true)
+                            layoutManager = GridLayoutManager(requireContext(), 2)
+                            adapter = productAdapter.also { adapter ->
+                                adapter.loadData(state.products as List<ProductsItem>)
+                                adapter.onItemClick = {
+                                    val action =
+                                        MainFragmentDirections.actionMainFragmentToDetailFragment(it)
+                                    findNavController().navigate(action)
+                                }
+                            }
+                        }
+                    }
                 }
-
             }
-
         }
 
     }

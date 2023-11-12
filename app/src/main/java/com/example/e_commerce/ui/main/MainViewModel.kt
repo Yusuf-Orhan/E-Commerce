@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_commerce.common.Resource
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.data.repository.CartRepository
 import com.example.e_commerce.data.repository.MainRepository
@@ -13,39 +14,60 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repo : MainRepository,private val cartRepository: CartRepository): ViewModel() {
-    val favoriteModels = MutableLiveData<List<Boolean>>()
-    private var _productsItemList = MutableLiveData<List<ProductsItem>>()
-    val productsItemList : LiveData<List<ProductsItem>>
-        get() = _productsItemList
-    private var _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean>
-        get() = _isLoading
-    private var _error = MutableLiveData<Boolean>()
-    val error : LiveData<Boolean>
-        get() = _error
+class MainViewModel @Inject constructor(
+    private val repo: MainRepository,
+    private val cartRepository: CartRepository
+) : ViewModel() {
+    private val favoriteModels = MutableLiveData<List<Boolean>>()
 
     val state = MutableLiveData(MainState(isLoading = true))
 
     init {
-        _productsItemList = repo.productsItemList
-        _isLoading = repo.isLoading
-        _error = repo.error
-    }
-    fun getData() = viewModelScope.launch{
-
+        getData()
     }
 
-    fun controlIsFavorite() = viewModelScope.launch{
+    fun handleEvent(event: MainEvent) {
+        when (event) {
+            is MainEvent.IsRefreshed -> {
+                println("Is Refreshed")
+                state.value = state.value?.copy(isLoading = true)
+                getData()
+            }
+
+            is MainEvent.TryAgain -> {
+                println("Is Products Clicked")
+                state.value = state.value?.copy(isLoading = true)
+                getData()
+            }
+        }
+    }
+
+    fun getData() = viewModelScope.launch {
+        when (val result = repo.getData()) {
+            is Resource.Success -> {
+                state.value =
+                    state.value?.copy(isLoading = false, isError = null, products = result.data)
+            }
+
+            is Resource.Error -> {
+                state.value =
+                    state.value?.copy(isLoading = false, isError = result.msg, products = null)
+            }
+        }
+    }
+
+    fun controlIsFavorite() = viewModelScope.launch {
         favoriteModels.value = cartRepository.controlIsFavorite()
     }
 }
 
-
-
+sealed class MainEvent {
+    object IsRefreshed : MainEvent()
+    object TryAgain : MainEvent()
+}
 
 data class MainState(
-    val isLoading : Boolean? = null,
-    val isError : Boolean? = null,
-    val isSuccess : List<ProductsItem>? = emptyList()
+    val isLoading: Boolean? = null,
+    val isError: String? = null,
+    val products: List<ProductsItem>? = emptyList()
 )
