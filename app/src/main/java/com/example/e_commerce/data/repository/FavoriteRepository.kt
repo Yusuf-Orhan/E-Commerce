@@ -14,9 +14,9 @@ class FavoriteRepository @Inject constructor(
         val favorite = FavoriteModel(id,productsItem)
         dao.insertFavorite(favorite)
     }
-    suspend fun controlFavorite(id : Int){
+     suspend fun controlFavorite(id : Int){
         val productsItem = dao.getCurrentFavorite(id)
-        isFavorite.value = productsItem?.productsItem != null
+        isFavorite.value = productsItem.value != null
     }
     suspend fun deleteFavorite(id : Int) = dao.delete(id)
 

@@ -1,5 +1,6 @@
 package com.example.e_commerce.ui.main
 
+import android.text.method.MultiTapKeyListener
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,16 +25,27 @@ class MainViewModel @Inject constructor(private val repo : MainRepository,privat
     val error : LiveData<Boolean>
         get() = _error
 
+    val state = MutableLiveData(MainState(isLoading = true))
+
     init {
         _productsItemList = repo.productsItemList
         _isLoading = repo.isLoading
         _error = repo.error
     }
     fun getData() = viewModelScope.launch{
-        repo.getData()
+
     }
 
     fun controlIsFavorite() = viewModelScope.launch{
         favoriteModels.value = cartRepository.controlIsFavorite()
     }
 }
+
+
+
+
+data class MainState(
+    val isLoading : Boolean? = null,
+    val isError : Boolean? = null,
+    val isSuccess : List<ProductsItem>? = emptyList()
+)

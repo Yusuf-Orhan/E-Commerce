@@ -33,12 +33,14 @@ import java.util.Locale
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
     lateinit var binding: FragmentDetailBinding
-    private val viewModel : DetailViewModel by viewModels()
-    private val arguments : DetailFragmentArgs by navArgs()
-    private lateinit var productItem : ProductsItem
+    private val viewModel: DetailViewModel by viewModels()
+    private val arguments: DetailFragmentArgs by navArgs()
+    private lateinit var productItem: ProductsItem
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         binding.detailFragment = this
         return binding.root
     }
@@ -48,38 +50,42 @@ class DetailFragment : Fragment() {
         productItem = arguments.productModel
         viewModel.controlFavorite(productItem.id)
         observes()
-        with(binding){
+        with(binding) {
             productModel = productItem
             priceText = "${productItem.price}$"
-            imageView.loadImage(productItem.image,requireContext())
+            imageView.loadImage(productItem.image, requireContext())
             category = capitalizeString(productItem.category)
             backImage.setOnClickListener {
                 findNavController().popBackStack()
             }
             favoriteImage.setOnClickListener {
-                viewModel.addFavorite(productItem.id,productItem)
+                viewModel.addFavorite(productItem.id, productItem)
+                viewModel.controlFavorite(productItem.id)
             }
         }
     }
+
     private fun capitalizeString(input: String): String {
         val words = input.split(" ")
         val capitalizedWords = words.map { it.capitalize(Locale.ROOT) }
         return capitalizedWords.joinToString(" ")
     }
 
-    fun addCart(){
+    fun addCart() {
         viewModel.addCart(productItem)
         requireView().showToast(getString(R.string.success_message2))
         val action = DetailFragmentDirections.actionDetailFragmentToMainFragment()
         findNavController().navigate(action)
     }
-    private fun observes(){
-        viewModel.isFavorite.observe(viewLifecycleOwner){
-            if (it){
+
+    private fun observes() {
+        viewModel.isFavorite.observe(viewLifecycleOwner) {
+            if (it) {
                 binding.favoriteImage.setImageResource(R.drawable.ic_favorite_selected)
-            }else{
+            } else {
                 binding.favoriteImage.setImageResource(R.drawable.ic_favorite_unselected)
             }
         }
+
     }
 }

@@ -12,6 +12,6 @@ import retrofit2.http.POST
 
 interface RetrofitApi {
     @GET("/products")
-    suspend fun getProducts() : Response<Products>
+    suspend fun getProducts() : Products
 
 }
