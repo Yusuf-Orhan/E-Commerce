@@ -35,7 +35,7 @@
         android:name="com.example.e_commerce.ui.detail.DetailFragment"
         android:label="DetailFragment" >
         <argument
-            android:name="productModel"
+            android:name="productItem"
             app:argType="com.example.e_commerce.data.model.retrofit.ProductsItem" />
         <action
             android:id="@+id/action_detailFragment_to_cartFragment"

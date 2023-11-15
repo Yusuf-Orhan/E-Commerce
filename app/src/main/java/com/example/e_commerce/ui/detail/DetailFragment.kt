@@ -47,7 +47,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productItem = arguments.productModel
+        productItem = arguments.productItem
         viewModel.controlFavorite(productItem.id)
         observes()
         with(binding) {
@@ -60,7 +60,6 @@ class DetailFragment : Fragment() {
             }
             favoriteImage.setOnClickListener {
                 viewModel.addFavorite(productItem.id, productItem)
-                viewModel.controlFavorite(productItem.id)
             }
         }
     }
@@ -79,13 +78,15 @@ class DetailFragment : Fragment() {
     }
 
     private fun observes() {
-        viewModel.isFavorite.observe(viewLifecycleOwner) {
-            if (it) {
+        viewModel.state.observe(viewLifecycleOwner){
+            if (it.isFavorite == true) {
+                println("İs Favorite")
                 binding.favoriteImage.setImageResource(R.drawable.ic_favorite_selected)
-            } else {
+            }
+            else {
+                println("İs Not Favorite")
                 binding.favoriteImage.setImageResource(R.drawable.ic_favorite_unselected)
             }
         }
-
     }
 }

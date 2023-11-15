@@ -50,27 +50,5 @@ class FavoriteFragment : Fragment() {
 
 @Composable
 fun FavoriteScreen(context: Context) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            TextButton(onClick = { showToastMessage(context = context, "Hello World") }) {
-                Text(text = "My Favorites")
-            }
-            ElevatedButton(onClick = { showToastMessage(context, "Elevated Button Clicked") }) {
-                Text(
-                    text = "Clicked"
-                )
-            }
-            Button(onClick = { showToastMessage(context, "Button Clicked") }) {
-                Text(
-                    text = "Clicked"
-                )
-            }
-        }
-    }
+
 }

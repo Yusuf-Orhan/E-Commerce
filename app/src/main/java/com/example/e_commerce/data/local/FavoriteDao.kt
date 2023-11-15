@@ -12,7 +12,7 @@ interface FavoriteDao {
     @Query("SELECT * FROM favorite")
     suspend fun getAllFavorite() : List<FavoriteModel>
     @Query("SELECT * FROM favorite WHERE uid = :id")
-    fun getCurrentFavorite(id : Int) : LiveData<FavoriteModel?>
+    fun getCurrentFavorite(id : Int) : FavoriteModel?
     @Insert
     suspend fun insertFavorite(favoriteModel: FavoriteModel)
     @Query("DELETE FROM favorite WHERE uid = :id")
