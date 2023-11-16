@@ -21,6 +21,8 @@ class FavoriteRepository @Inject constructor(
         println("Favorite Repository Control : ${isFavorite.value}")
     }
 
+    suspend fun getFavorite() = dao.getAllFavorite()
+
     suspend fun deleteFavorite(id: Int) = dao.delete(id)
 
 }
