@@ -41,7 +41,9 @@ android {
             )
         }
     }
-
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -57,6 +59,10 @@ val coroutineVersion = "1.7.3"
 val lifecycleVersion = "2.6.1"
 val hiltVersion = "2.48.1"
 val lottieVersion = "6.1.0"
+
+kapt{
+    correctErrorTypes = true
+}
 
 dependencies {
 

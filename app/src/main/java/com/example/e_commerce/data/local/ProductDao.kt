@@ -12,7 +12,7 @@ interface ProductDao {
 
 
     @Query("SELECT price FROM products")
-    suspend fun getTotalAmount(): List<Double>?
+    suspend fun getTotalAmount(): List<Double>
 
     @Query("SELECT isFavorite FROM products")
     suspend fun getFavorite(): List<Boolean>
