@@ -10,12 +10,12 @@ import com.example.e_commerce.data.model.room.FavoriteModel
 import com.example.e_commerce.databinding.FavoriteListItemBinding
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-    val list = arrayListOf<FavoriteModel>()
+    val list = ArrayList<FavoriteModel>()
     class FavoriteViewHolder(val binding : FavoriteListItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(productsItem: ProductsItem,context: Context){
             with(binding){
                 favoriteImage.loadImage(productsItem.image,context)
-                descriptionText.text = productsItem.description
+                descriptionText.text = productsItem.title
                 priceText.text = "${productsItem.price}$"
                 rateText.text = productsItem.rating.rate.toString()
             }
@@ -23,7 +23,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        val binding = FavoriteListItemBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = FavoriteListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return FavoriteViewHolder(binding)
     }
 
@@ -31,5 +31,8 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(list[position].productsItem,holder.itemView.context)
+    }
+    fun loadData(newList : List<FavoriteModel>){
+        list.addAll(newList)
     }
 }

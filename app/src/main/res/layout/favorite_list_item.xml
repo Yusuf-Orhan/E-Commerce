@@ -37,18 +37,19 @@
                 tools:layout_editor_absoluteY="5dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="@+id/favoriteImage"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
                 app:layout_constraintStart_toEndOf="@+id/favoriteImage"
                 app:layout_constraintTop_toTopOf="@+id/favoriteImage">
 
                 <TextView
                     android:id="@+id/descriptionText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Man Jacket"
                     android:textColor="@color/black"
@@ -66,6 +67,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -74,9 +76,9 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:padding="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="3dp"
                     android:src="@drawable/ic_favorite_selected" />
 
                 <TextView

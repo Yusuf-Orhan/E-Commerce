@@ -1,5 +1,6 @@
 package com.example.e_commerce.di
 
+import com.example.e_commerce.data.local.FavoriteDao
 import com.example.e_commerce.data.repository.CartRepository
 
 import com.example.e_commerce.data.repository.MainRepository
@@ -7,6 +8,7 @@ import com.example.e_commerce.data.repository.ProfileRepository
 import com.example.e_commerce.data.repository.UserRepository
 import com.example.e_commerce.data.remote.RetrofitApi
 import com.example.e_commerce.data.local.ProductDao
+import com.example.e_commerce.data.repository.FavoriteRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -32,5 +34,8 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideCartRepo(dao : ProductDao) : CartRepository = CartRepository(dao)
+    @Provides
+    @Singleton
+    fun provideFavoriteRepo(dao : FavoriteDao) : FavoriteRepository = FavoriteRepository(dao)
 
 }

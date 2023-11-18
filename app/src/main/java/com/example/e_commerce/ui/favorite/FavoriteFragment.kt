@@ -46,8 +46,10 @@ import androidx.compose.ui.unit.dp
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.compose.AsyncImage
 import com.example.e_commerce.R
+import com.example.e_commerce.common.showToast
 import com.example.e_commerce.data.model.retrofit.ProductsItem
 import com.example.e_commerce.data.model.room.FavoriteModel
 import com.example.e_commerce.databinding.FragmentFavoriteBinding
@@ -57,7 +59,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     lateinit var binding: FragmentFavoriteBinding
-
+    private val adapter = FavoriteAdapter()
     private val viewModel: FavoriteViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -68,117 +70,18 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.getFavorite()
+        binding.favoriteRecyclerView.adapter = adapter
+        binding.favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        observes()
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun FavoriteScreen(
-    state: FavoriteState, context: Context, modifier: Modifier = Modifier
-) {
-    Scaffold(modifier = modifier.fillMaxSize(), topBar = {
-        TopAppBar(title = { Text(text = stringResource(id = R.string.bottom_nav_favorite)) })
-    }) {
-        Column(
-            modifier = modifier.padding(it)
-        ) {
-            FavoriteList(state.favoriteList)
-        }
-    }
-}
-
-
-@Composable
-fun FavoriteList(
-    favorites: List<FavoriteModel>, modifier: Modifier = Modifier
-) {
-    LazyColumn {
-        items(favorites) {
-            FavoriteItem(it.productsItem)
-        }
-    }
-}
-
-
-
-@Composable
-fun FavoriteItem(
-    productsItem: ProductsItem, modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(5.dp),
-    ) {
-        Box(
-            modifier = modifier.fillMaxSize()
-        ) {
-            Row {
-                AsyncImage(
-                    model = productsItem.image,
-                    modifier = modifier
-                        .padding(16.dp)
-                        .size(90.dp),
-                    placeholder = painterResource(id = R.drawable.baseline_loading_24),
-                    contentDescription = null
-                )
-                Column(
-                    modifier = modifier.padding(top = 10.dp),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(text = productsItem.title)
-                    Text(text = "${productsItem.price}$")
-                }
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.End
-            ) {
-
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = null,
-                    tint = Color(red = 255, green = 186, blue = 73),
-                    modifier = Modifier.size(24.dp)
-                )
-                Text(
-                    text = "${productsItem.rating.rate}",
-                    modifier = Modifier.padding(start = 4.dp),
-                    fontWeight = FontWeight.Bold
-                )
+    private fun observes() {
+        viewModel.favoriteList.observe(viewLifecycleOwner) { favoriteList ->
+            if (favoriteList.isNotEmpty()) {
+                adapter.loadData(favoriteList)
+            }else{
+                requireView().showToast("Empty List")
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
