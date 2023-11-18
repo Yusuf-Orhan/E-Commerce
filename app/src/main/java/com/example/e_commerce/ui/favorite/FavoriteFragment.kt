@@ -68,10 +68,6 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.composeView.setContent {
-            val state by viewModel.state
-            FavoriteScreen(state, requireContext())
-        }
 
     }
 }
