@@ -10,7 +10,7 @@ import com.example.e_commerce.data.model.room.FavoriteModel
 import com.example.e_commerce.databinding.FavoriteListItemBinding
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-    val list = ArrayList<FavoriteModel>()
+    private val favoriteList = ArrayList<FavoriteModel>()
     class FavoriteViewHolder(val binding : FavoriteListItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(productsItem: ProductsItem,context: Context){
             with(binding){
@@ -27,12 +27,14 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
         return FavoriteViewHolder(binding)
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount() = favoriteList.size
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bind(list[position].productsItem,holder.itemView.context)
+        holder.bind(favoriteList[position].productsItem,holder.itemView.context)
     }
     fun loadData(newList : List<FavoriteModel>){
-        list.addAll(newList)
+        favoriteList.clear()
+        favoriteList.addAll(newList)
+        notifyDataSetChanged()
     }
 }
