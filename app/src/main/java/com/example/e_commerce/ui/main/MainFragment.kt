@@ -11,9 +11,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.e_commerce.R
 import com.example.e_commerce.common.showSnackbar
-import com.example.e_commerce.data.model.retrofit.ProductsItem
+import com.example.e_commerce.data.model.remote.ProductsItem
 import com.example.e_commerce.databinding.FragmentMainBinding
-import com.example.e_commerce.ui.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

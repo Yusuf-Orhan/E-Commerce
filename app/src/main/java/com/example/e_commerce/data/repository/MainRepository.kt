@@ -1,8 +1,7 @@
 package com.example.e_commerce.data.repository
 
-import androidx.lifecycle.MutableLiveData
 import com.example.e_commerce.common.Resource
-import com.example.e_commerce.data.model.retrofit.ProductsItem
+import com.example.e_commerce.data.model.remote.ProductsItem
 import com.example.e_commerce.data.remote.RetrofitApi
 
 import javax.inject.Inject

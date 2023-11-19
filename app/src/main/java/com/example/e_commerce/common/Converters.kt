@@ -1,7 +1,7 @@
 package com.example.e_commerce.common
 
 import androidx.room.TypeConverter
-import com.example.e_commerce.data.model.retrofit.ProductsItem
+import com.example.e_commerce.data.model.remote.ProductsItem
 import com.google.gson.Gson
 
 class Converters {

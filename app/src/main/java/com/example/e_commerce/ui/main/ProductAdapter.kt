@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerce.R
 import com.example.e_commerce.common.loadImage
-import com.example.e_commerce.data.model.retrofit.ProductsItem
+import com.example.e_commerce.data.model.remote.ProductsItem
 import com.example.e_commerce.databinding.ProductListItemBinding
 
 class ProductAdapter(val context: Context) :

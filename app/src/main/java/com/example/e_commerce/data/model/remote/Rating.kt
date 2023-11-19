@@ -1,4 +1,4 @@
-package com.example.e_commerce.data.model.retrofit
+package com.example.e_commerce.data.model.remote
 
 data class Rating(
     val count: Int,

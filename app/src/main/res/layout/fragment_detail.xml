@@ -8,7 +8,7 @@
             type="com.example.e_commerce.ui.detail.DetailFragment" />
         <variable
             name="productModel"
-            type="com.example.e_commerce.data.model.retrofit.ProductsItem" />
+            type="com.example.e_commerce.data.model.remote.ProductsItem" />
         <variable
             name="priceText"
             type="String" />

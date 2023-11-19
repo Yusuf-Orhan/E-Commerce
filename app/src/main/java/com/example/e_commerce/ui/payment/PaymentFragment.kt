@@ -1,21 +1,16 @@
 package com.example.e_commerce.ui.payment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.InputFilter
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.e_commerce.R
-import com.example.e_commerce.common.CreditCardTextFormatter
+import com.example.e_commerce.common.util.CreditCardTextFormatter
 import com.example.e_commerce.common.showToast
 import com.example.e_commerce.databinding.FragmentPaymentBinding
-import com.google.android.material.textfield.TextInputEditText
 
 class PaymentFragment : Fragment() {
     lateinit var binding: FragmentPaymentBinding

@@ -1,12 +1,10 @@
 package com.example.e_commerce.ui.main
 
-import android.text.method.MultiTapKeyListener
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_commerce.common.Resource
-import com.example.e_commerce.data.model.retrofit.ProductsItem
+import com.example.e_commerce.data.model.remote.ProductsItem
 import com.example.e_commerce.data.repository.CartRepository
 import com.example.e_commerce.data.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

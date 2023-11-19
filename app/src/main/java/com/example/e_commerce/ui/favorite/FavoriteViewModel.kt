@@ -1,10 +1,9 @@
 package com.example.e_commerce.ui.favorite
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.e_commerce.data.model.room.FavoriteModel
+import com.example.e_commerce.data.model.local.FavoriteModel
 import com.example.e_commerce.data.repository.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

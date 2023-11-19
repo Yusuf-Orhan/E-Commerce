@@ -1,6 +1,5 @@
 package com.example.e_commerce.ui.user.signup
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,12 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.e_commerce.MainActivity
 import com.example.e_commerce.R
-import com.example.e_commerce.common.Singleton
 import com.example.e_commerce.common.showToast
 import com.example.e_commerce.databinding.FragmentSignupBinding
 

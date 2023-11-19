@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.e_commerce.data.model.room.FavoriteModel
+import com.example.e_commerce.data.model.local.FavoriteModel
 
 @Dao
 interface FavoriteDao {

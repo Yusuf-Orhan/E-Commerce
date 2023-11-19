@@ -1,6 +1,5 @@
-package com.example.e_commerce.data.model.retrofit
+package com.example.e_commerce.data.model.remote
 
-import androidx.room.Entity
 import java.io.Serializable
 
 data class ProductsItem(

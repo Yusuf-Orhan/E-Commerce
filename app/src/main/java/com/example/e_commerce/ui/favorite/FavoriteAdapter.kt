@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_commerce.common.loadImage
-import com.example.e_commerce.data.model.retrofit.ProductsItem
-import com.example.e_commerce.data.model.room.FavoriteModel
+import com.example.e_commerce.data.model.remote.ProductsItem
+import com.example.e_commerce.data.model.local.FavoriteModel
 import com.example.e_commerce.databinding.FavoriteListItemBinding
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {

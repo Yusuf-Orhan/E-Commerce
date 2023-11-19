@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.e_commerce.data.model.room.ProductModel
+import com.example.e_commerce.data.model.local.ProductModel
 
 
 @Dao
