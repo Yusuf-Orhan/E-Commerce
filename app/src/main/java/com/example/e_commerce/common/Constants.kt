@@ -2,7 +2,6 @@ package com.example.e_commerce.common
 
 object Constants {
 
-    // TODO: Alternative api -> https://api.escuelajs.co/api/v1/products
     const val BASE_URL = "https://fakestoreapi.com"
     const val USER = "User"
     const val NAME = "Name"

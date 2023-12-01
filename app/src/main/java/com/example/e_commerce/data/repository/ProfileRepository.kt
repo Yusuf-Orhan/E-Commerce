@@ -1,5 +1,6 @@
 package com.example.e_commerce.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.e_commerce.common.Constants.NAME
@@ -19,7 +20,7 @@ class ProfileRepository @Inject constructor(private val firebaseAuth: FirebaseAu
     fun getUser() : LiveData<User>{
         firestore.collection(USER).document(firebaseAuth.currentUser?.email.toString()).addSnapshotListener { value, error ->
             if (error != null){
-                println("Error : ${error.message}")
+               Log.e("User",error.message.orEmpty())
             }else{
                 value?.let {
                     val userMap = it.data

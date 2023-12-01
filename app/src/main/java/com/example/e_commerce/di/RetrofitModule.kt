@@ -1,7 +1,7 @@
 package com.example.e_commerce.di
 
 import com.example.e_commerce.common.Constants.BASE_URL
-import com.example.e_commerce.data.remote.RetrofitApi
+import com.example.e_commerce.data.remote.ProductsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,12 +12,12 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitModule  {
+object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitApi() : RetrofitApi = Retrofit.Builder()
+    fun provideRetrofitApi(): ProductsApi = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
-        .build().create(RetrofitApi::class.java)
+        .build().create(ProductsApi::class.java)
 }

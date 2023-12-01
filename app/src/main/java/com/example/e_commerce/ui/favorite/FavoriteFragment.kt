@@ -38,7 +38,7 @@ class FavoriteFragment : Fragment() {
             if (favoriteList.isNotEmpty()) {
                 adapter.loadData(favoriteList)
             }else{
-                requireView().showToast("Empty List")
+                requireView().showToast("Favorite Not Found!")
             }
         }
     }

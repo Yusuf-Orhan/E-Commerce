@@ -53,6 +53,5 @@ class ProductAdapter(val context: Context) :
     fun loadData(newList: List<ProductsItem>) {
         productList.clear()
         productList.addAll(newList)
-        println(productList.size)
     }
 }

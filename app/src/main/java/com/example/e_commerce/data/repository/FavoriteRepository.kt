@@ -18,7 +18,6 @@ class FavoriteRepository @Inject constructor(
     suspend fun controlFavorite(id: Int) {
         val productsItem = dao.getCurrentFavorite(id)
         isFavorite.value = productsItem != null
-        println("Favorite Repository Control : ${isFavorite.value}")
     }
 
     suspend fun getFavorite() = dao.getAllFavorite()

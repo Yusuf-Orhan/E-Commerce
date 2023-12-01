@@ -14,7 +14,6 @@ object  FirebaseModule {
     @Provides
     @Singleton
     fun firebaseAuthProvide() : FirebaseAuth {
-        println("Firebase Auth Module Çalıltı")
        return FirebaseAuth.getInstance()
     }
     @Provides

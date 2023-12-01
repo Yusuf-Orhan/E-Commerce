@@ -1,11 +1,11 @@
 package com.example.e_commerce.ui.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,11 +16,6 @@ import com.example.e_commerce.data.model.remote.ProductsItem
 import com.example.e_commerce.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
-
-/*TODO : viewmodel deki insert item fonksiyonunda daha önce böyle bir ürünün kaydedilip kaydedilmediği kontrol edilecek eğer kaydedildiyse favorite tablosundan bunu
-    silecek eğer kaydedilmediyse kaydedecek
- */
-
 
 
 @AndroidEntryPoint
@@ -71,13 +66,10 @@ class DetailFragment : Fragment() {
     }
 
     private fun observes() {
-        viewModel.state.observe(viewLifecycleOwner){
+        viewModel.state.observe(viewLifecycleOwner) {
             if (it.isFavorite == true) {
-                println("İs Favorite")
                 binding.favoriteImage.setImageResource(R.drawable.ic_favorite_selected)
-            }
-            else {
-                println("İs Not Favorite")
+            } else {
                 binding.favoriteImage.setImageResource(R.drawable.ic_favorite_unselected)
             }
         }

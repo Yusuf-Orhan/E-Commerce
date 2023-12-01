@@ -49,7 +49,6 @@ class UserRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,
             firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
                 if(!task.isSuccessful) {
                     state.value = LoginState(isSigned = false,isError = true)
-                    println("5 ")
                 }else{
                     state.value = LoginState(isSigned = true,isError = false)
                 }

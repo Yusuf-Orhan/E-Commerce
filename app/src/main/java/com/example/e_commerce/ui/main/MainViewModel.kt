@@ -27,20 +27,18 @@ class MainViewModel @Inject constructor(
     fun handleEvent(event: MainEvent) {
         when (event) {
             is MainEvent.IsRefreshed -> {
-                println("Is Refreshed")
                 state.value = state.value?.copy(isLoading = true)
                 getData()
             }
 
             is MainEvent.TryAgain -> {
-                println("Is Products Clicked")
                 state.value = state.value?.copy(isLoading = true)
                 getData()
             }
         }
     }
 
-    fun getData() = viewModelScope.launch {
+    private fun getData() = viewModelScope.launch {
         when (val result = repo.getData()) {
             is Resource.Success -> {
                 state.value =
