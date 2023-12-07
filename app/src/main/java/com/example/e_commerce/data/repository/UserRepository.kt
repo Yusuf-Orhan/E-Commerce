@@ -50,6 +50,7 @@ class UserRepository @Inject constructor(private val firebaseAuth: FirebaseAuth,
                 if(!task.isSuccessful) {
                     state.value = LoginState(isSigned = false,isError = true)
                 }else{
+                    println(task.exception?.message)
                     state.value = LoginState(isSigned = true,isError = false)
                 }
             }

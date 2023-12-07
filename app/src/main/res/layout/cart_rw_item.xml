@@ -49,7 +49,7 @@
                 android:layout_marginStart="10dp"
                 android:maxLines="2"
                 android:padding="10dp"
-                android:text="@{titleText}"
+                android:text="@{priceText}"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
                 android:layout_marginEnd="10dp"
                 app:fabSize="mini"
                 app:fabCustomSize="30dp"
-                android:src="@drawable/ic_baseline_delete_outline_24"
+                android:src="@drawable/ic_baseline_delete_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:tint="@color/white" />
